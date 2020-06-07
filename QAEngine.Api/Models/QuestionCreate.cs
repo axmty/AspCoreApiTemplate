@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace QAEngine.Api.Models
+﻿namespace QAEngine.Api.Models
 {
     public class QuestionCreate
     {

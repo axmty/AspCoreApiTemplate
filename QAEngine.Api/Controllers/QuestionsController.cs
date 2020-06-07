@@ -24,7 +24,8 @@ namespace QAEngine.Api.Controllers
             return (await _context.Questions.ToListAsync()).Select(q => new Models.Question
             {
                 Content = q.Content,
-                CreateDate = q.CreateDate
+                CreateDate = q.CreateDate,
+                Id = q.Id
             }).ToList();
         }
 
@@ -41,7 +42,8 @@ namespace QAEngine.Api.Controllers
             return new Models.Question
             {
                 Content = question.Content,
-                CreateDate = question.CreateDate
+                CreateDate = question.CreateDate,
+                Id = question.Id
             };
         }
 
@@ -61,7 +63,6 @@ namespace QAEngine.Api.Controllers
             return CreatedAtAction("Get", new { id = data.Id }, question);
         }
 
-        // DELETE: api/Questions/5
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
