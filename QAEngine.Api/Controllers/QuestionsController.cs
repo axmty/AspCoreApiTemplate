@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using QAEngine.Api.Data;
 
 namespace QAEngine.Api.Controllers
 {
@@ -11,23 +11,25 @@ namespace QAEngine.Api.Controllers
     [ApiController]
     public class QuestionsController : ControllerBase
     {
-        private readonly QAEngineContext _context;
+        private readonly Data.QAEngineContext _context;
 
-        public QuestionsController(QAEngineContext context)
+        public QuestionsController(Data.QAEngineContext context)
         {
             _context = context;
         }
 
-        // GET: api/Questions
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Question>>> GetQuestions()
+        public async Task<ActionResult<IEnumerable<Models.Question>>> GetAsync()
         {
-            return await _context.Questions.ToListAsync();
+            return (await _context.Questions.ToListAsync()).Select(q => new Models.Question
+            {
+                Content = q.Content,
+                CreateDate = q.CreateDate
+            }).ToList();
         }
 
-        // GET: api/Questions/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Question>> GetQuestion(string id)
+        public async Task<ActionResult<Models.Question>> GetAsync(int id)
         {
             var question = await _context.Questions.FindAsync(id);
 
@@ -36,70 +38,32 @@ namespace QAEngine.Api.Controllers
                 return NotFound();
             }
 
-            return question;
+            return new Models.Question
+            {
+                Content = question.Content,
+                CreateDate = question.CreateDate
+            };
         }
 
-        // PUT: api/Questions/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutQuestion(int id, Question question)
-        {
-            if (id != question.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(question).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!QuestionExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Questions
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Question>> PostQuestion(Question question)
+        public async Task<ActionResult<Models.Question>> CreateAsync(Models.QuestionCreate question)
         {
-            _context.Questions.Add(question);
-            try
+            var data = new Data.Question
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (QuestionExists(question.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                Content = question.Content,
+                CreateDate = DateTimeOffset.Now
+            };
 
-            return CreatedAtAction("GetQuestion", new { id = question.Id }, question);
+            _context.Questions.Add(data);
+
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("Get", new { id = data.Id }, question);
         }
 
         // DELETE: api/Questions/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Question>> DeleteQuestion(string id)
+        public async Task<ActionResult> Delete(int id)
         {
             var question = await _context.Questions.FindAsync(id);
             if (question == null)
@@ -110,12 +74,7 @@ namespace QAEngine.Api.Controllers
             _context.Questions.Remove(question);
             await _context.SaveChangesAsync();
 
-            return question;
-        }
-
-        private bool QuestionExists(int id)
-        {
-            return _context.Questions.Any(e => e.Id == id);
+            return NoContent();
         }
     }
 }
