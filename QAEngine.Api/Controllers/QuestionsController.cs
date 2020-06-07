@@ -60,7 +60,14 @@ namespace QAEngine.Api.Controllers
 
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("Get", new { id = data.Id }, question);
+            var response = new Models.Question
+            {
+                Content = data.Content,
+                CreateDate = data.CreateDate,
+                Id = data.Id
+            };
+
+            return CreatedAtAction("Get", new { id = data.Id }, response);
         }
 
         [HttpDelete("{id}")]
