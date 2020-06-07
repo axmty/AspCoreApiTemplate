@@ -67,7 +67,7 @@ namespace QAEngine.Api.Controllers
                 Id = data.Id
             };
 
-            return CreatedAtAction("Get", new { id = data.Id }, response);
+            return this.CreatedAtAction("Get", new { id = data.Id }, response);
         }
 
         [HttpDelete("{id}")]
@@ -82,7 +82,7 @@ namespace QAEngine.Api.Controllers
             _context.Questions.Remove(question);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return this.NoContent();
         }
     }
 }
