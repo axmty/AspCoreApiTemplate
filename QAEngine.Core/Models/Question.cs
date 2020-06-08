@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace QAEngine.Api.Models
+namespace QAEngine.Core.Models
 {
     public class Question
     {

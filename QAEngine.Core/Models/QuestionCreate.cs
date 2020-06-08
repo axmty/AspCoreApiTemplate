@@ -1,4 +1,4 @@
-﻿namespace QAEngine.Api.Models
+﻿namespace QAEngine.Core.Models
 {
     public class QuestionCreate
     {

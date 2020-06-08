@@ -19,9 +19,9 @@ namespace QAEngine.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Models.Question>>> GetAsync()
+        public async Task<ActionResult<IEnumerable<Core.Models.Question>>> GetAsync()
         {
-            return (await _context.Questions.ToListAsync()).Select(q => new Models.Question
+            return (await _context.Questions.ToListAsync()).Select(q => new Core.Models.Question
             {
                 Content = q.Content,
                 CreateDate = q.CreateDate,
@@ -30,7 +30,7 @@ namespace QAEngine.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Models.Question>> GetAsync(int id)
+        public async Task<ActionResult<Core.Models.Question>> GetAsync(int id)
         {
             var question = await _context.Questions.FindAsync(id);
 
@@ -39,7 +39,7 @@ namespace QAEngine.Api.Controllers
                 return NotFound();
             }
 
-            return new Models.Question
+            return new Core.Models.Question
             {
                 Content = question.Content,
                 CreateDate = question.CreateDate,
@@ -48,7 +48,7 @@ namespace QAEngine.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Models.Question>> CreateAsync(Models.QuestionCreate question)
+        public async Task<ActionResult<Core.Models.Question>> CreateAsync(Core.Models.QuestionCreate question)
         {
             var data = new Core.Data.Question
             {
@@ -60,7 +60,7 @@ namespace QAEngine.Api.Controllers
 
             await _context.SaveChangesAsync();
 
-            var response = new Models.Question
+            var response = new Core.Models.Question
             {
                 Content = data.Content,
                 CreateDate = data.CreateDate,
