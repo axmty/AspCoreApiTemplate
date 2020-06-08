@@ -14,7 +14,9 @@ namespace QAEngine.Api.Controllers
         {
             var exceptionHandlerPathFeature = this.HttpContext.Features.Get<IExceptionHandlerPathFeature>();
 
-            var detail = $"{exceptionHandlerPathFeature.Path}: {exceptionHandlerPathFeature.Error.Message}";
+            var detail = (exceptionHandlerPathFeature != null)
+                ? $"{exceptionHandlerPathFeature.Path}: {exceptionHandlerPathFeature.Error.Message}"
+                : null;
 
             var problemDetails = new ProblemDetails
             {
@@ -22,9 +24,6 @@ namespace QAEngine.Api.Controllers
                 Detail = detail,
                 Title = "An error occured.",
             };
-
-            problemDetails.Extensions["stacktrace"] = exceptionHandlerPathFeature.Error.StackTrace;
-            problemDetails.Extensions["innerexception"] = exceptionHandlerPathFeature.Error.InnerException;
 
             return new ObjectResult(problemDetails)
             {

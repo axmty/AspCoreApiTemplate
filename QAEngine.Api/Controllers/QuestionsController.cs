@@ -21,6 +21,7 @@ namespace QAEngine.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Models.Question>>> GetAsync()
         {
+            throw new Exception("AHAH");
             return (await _context.Questions.ToListAsync()).Select(q => new Models.Question
             {
                 Content = q.Content,
