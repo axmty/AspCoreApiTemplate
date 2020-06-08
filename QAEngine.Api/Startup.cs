@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using QAEngine.Core.Data;
+using QAEngine.Infra.Data;
 
 namespace QAEngine.Api
 {
@@ -18,7 +18,7 @@ namespace QAEngine.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<QAEngineContext>(opt => opt.UseInMemoryDatabase("QAEngine"));
+            services.AddDbContext<QAEngineContext>(options => options.UseInMemoryDatabase("QAEngine"));
             services.AddControllers();
         }
 

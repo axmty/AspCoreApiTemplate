@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\QAEngine.Core\QAEngine.Core.csproj" />
+    <ProjectReference Include="..\QAEngine.Infra\QAEngine.Infra.csproj" />
   </ItemGroup>
 
 </Project>

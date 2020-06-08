@@ -4,7 +4,7 @@ namespace QAEngine.Core.Models
 {
     public class Question
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         public string Content { get; set; }
 

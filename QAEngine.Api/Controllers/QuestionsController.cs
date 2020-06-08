@@ -25,7 +25,7 @@ namespace QAEngine.Api.Controllers
             {
                 Content = q.Content,
                 CreateDate = q.CreateDate,
-                Id = q.Id
+                ID = q.ID
             }).ToList();
         }
 
@@ -43,7 +43,7 @@ namespace QAEngine.Api.Controllers
             {
                 Content = question.Content,
                 CreateDate = question.CreateDate,
-                Id = question.Id
+                ID = question.ID
             };
         }
 
@@ -64,10 +64,10 @@ namespace QAEngine.Api.Controllers
             {
                 Content = data.Content,
                 CreateDate = data.CreateDate,
-                Id = data.Id
+                ID = data.ID
             };
 
-            return this.CreatedAtAction("Get", new { id = data.Id }, response);
+            return this.CreatedAtAction("Get", new { id = data.ID }, response);
         }
 
         [HttpDelete("{id}")]
