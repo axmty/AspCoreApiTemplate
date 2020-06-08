@@ -13,22 +13,9 @@ namespace QAEngine.Api.Controllers
         public IActionResult Error()
         {
             var exceptionHandlerPathFeature = this.HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+            var detail = exceptionHandlerPathFeature?.Error.Message;
 
-            var detail = (exceptionHandlerPathFeature != null)
-                ? $"{exceptionHandlerPathFeature.Path}: {exceptionHandlerPathFeature.Error.Message}"
-                : null;
-
-            var problemDetails = new ProblemDetails
-            {
-                Status = (int)HttpStatusCode.InternalServerError,
-                Detail = detail,
-                Title = "An error occured.",
-            };
-
-            return new ObjectResult(problemDetails)
-            {
-                StatusCode = (int)HttpStatusCode.InternalServerError
-            };
+            return this.Problem(detail: detail, statusCode: (int)HttpStatusCode.InternalServerError, title: "An error occured.");
         }
     }
 }
