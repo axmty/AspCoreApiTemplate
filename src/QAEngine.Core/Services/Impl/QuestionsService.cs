@@ -24,5 +24,17 @@ namespace QAEngine.Core.Services
                 ID = q.ID
             });
         }
+
+        public async Task<QuestionRead> GetAsync(int id)
+        {
+            var data = await _questionsRepository.GetAsync(id);
+
+            return new QuestionRead
+            {
+                Content = data.Content,
+                CreateDate = data.CreateDate,
+                ID = data.ID
+            };
+        }
     }
 }

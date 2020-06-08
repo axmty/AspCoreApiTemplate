@@ -21,23 +21,11 @@ namespace QAEngine.Api.Controllers
             return this.Ok(await _questionsService.GetAsync());
         }
 
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Core.Models.QuestionRead>> GetAsync(int id)
-        //{
-        //    var question = await _context.Questions.FindAsync(id);
-
-        //    if (question == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return new Core.Models.QuestionRead
-        //    {
-        //        Content = question.Content,
-        //        CreateDate = question.CreateDate,
-        //        ID = question.ID
-        //    };
-        //}
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetAsync(int id)
+        {
+            return this.Ok(await _questionsService.GetAsync(id));
+        }
 
         //[HttpPost]
         //public async Task<ActionResult<Core.Models.QuestionRead>> CreateAsync(Core.Models.QuestionCreate question)

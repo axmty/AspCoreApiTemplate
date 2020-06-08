@@ -7,5 +7,7 @@ namespace QAEngine.Core.Services
     public interface IQuestionsService
     {
         Task<IEnumerable<QuestionRead>> GetAsync();
+
+        Task<QuestionRead> GetAsync(int id);
     }
 }
