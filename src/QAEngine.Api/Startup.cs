@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using QAEngine.Infra.Data;
-using QAEngine.Core.Services;
 using QAEngine.Core.Repositories;
+using QAEngine.Core.Services;
+using QAEngine.Infra.Data;
 using QAEngine.Infra.Repositories;
 
 namespace QAEngine.Api

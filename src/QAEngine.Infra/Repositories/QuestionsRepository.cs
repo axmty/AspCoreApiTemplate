@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using QAEngine.Core.Data;
 using QAEngine.Core.Repositories;
 using QAEngine.Infra.Data;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace QAEngine.Infra.Repositories
 {

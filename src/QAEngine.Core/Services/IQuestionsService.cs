@@ -1,6 +1,6 @@
-﻿using QAEngine.Core.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using QAEngine.Core.Models;
 
 namespace QAEngine.Core.Services
 {
