@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QAEngine.Api", "QAEngine.Api\QAEngine.Api.csproj", "{44380AA0-EDE5-494F-948D-92B5808229BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QAEngine.Api", "QAEngine.Api\QAEngine.Api.csproj", "{44380AA0-EDE5-494F-948D-92B5808229BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QAEngine.Core", "QAEngine.Core\QAEngine.Core.csproj", "{BC266B3E-5CF2-49C0-8F4A-F886FFFD90DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{44380AA0-EDE5-494F-948D-92B5808229BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44380AA0-EDE5-494F-948D-92B5808229BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44380AA0-EDE5-494F-948D-92B5808229BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC266B3E-5CF2-49C0-8F4A-F886FFFD90DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC266B3E-5CF2-49C0-8F4A-F886FFFD90DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC266B3E-5CF2-49C0-8F4A-F886FFFD90DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC266B3E-5CF2-49C0-8F4A-F886FFFD90DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

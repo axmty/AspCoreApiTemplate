@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace QAEngine.Api.Data
+namespace QAEngine.Core.Data
 {
     public class Question
     {

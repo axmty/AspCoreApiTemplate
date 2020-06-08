@@ -11,9 +11,9 @@ namespace QAEngine.Api.Controllers
     [ApiController]
     public class QuestionsController : ControllerBase
     {
-        private readonly Data.QAEngineContext _context;
+        private readonly Core.Data.QAEngineContext _context;
 
-        public QuestionsController(Data.QAEngineContext context)
+        public QuestionsController(Core.Data.QAEngineContext context)
         {
             _context = context;
         }
@@ -21,7 +21,6 @@ namespace QAEngine.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Models.Question>>> GetAsync()
         {
-            throw new Exception("AHAH");
             return (await _context.Questions.ToListAsync()).Select(q => new Models.Question
             {
                 Content = q.Content,
@@ -51,7 +50,7 @@ namespace QAEngine.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Models.Question>> CreateAsync(Models.QuestionCreate question)
         {
-            var data = new Data.Question
+            var data = new Core.Data.Question
             {
                 Content = question.Content,
                 CreateDate = DateTimeOffset.Now

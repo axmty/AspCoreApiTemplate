@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace QAEngine.Api.Data
+namespace QAEngine.Core.Data
 {
     public class QAEngineContext : DbContext
     {
