@@ -2,7 +2,7 @@
 
 namespace QAEngine.Core.Models
 {
-    public class Question
+    public class QuestionRead
     {
         public int ID { get; set; }
 

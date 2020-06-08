@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using QAEngine.Core.Services;
+using QAEngine.Infra.Data;
 
 namespace QAEngine.Api.Controllers
 {
@@ -11,78 +13,73 @@ namespace QAEngine.Api.Controllers
     [ApiController]
     public class QuestionsController : ControllerBase
     {
-        private readonly Core.Data.QAEngineContext _context;
+        private readonly IQuestionsService _questionsService;
 
-        public QuestionsController(Core.Data.QAEngineContext context)
+        public QuestionsController(IQuestionsService questionsService)
         {
-            _context = context;
+            _questionsService = questionsService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Core.Models.Question>>> GetAsync()
+        public async Task<ActionResult> GetAsync()
         {
-            return (await _context.Questions.ToListAsync()).Select(q => new Core.Models.Question
-            {
-                Content = q.Content,
-                CreateDate = q.CreateDate,
-                ID = q.ID
-            }).ToList();
+            return this.Ok(await _questionsService.GetAsync());
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Core.Models.Question>> GetAsync(int id)
-        {
-            var question = await _context.Questions.FindAsync(id);
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Core.Models.QuestionRead>> GetAsync(int id)
+        //{
+        //    var question = await _context.Questions.FindAsync(id);
 
-            if (question == null)
-            {
-                return NotFound();
-            }
+        //    if (question == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return new Core.Models.Question
-            {
-                Content = question.Content,
-                CreateDate = question.CreateDate,
-                ID = question.ID
-            };
-        }
+        //    return new Core.Models.QuestionRead
+        //    {
+        //        Content = question.Content,
+        //        CreateDate = question.CreateDate,
+        //        ID = question.ID
+        //    };
+        //}
 
-        [HttpPost]
-        public async Task<ActionResult<Core.Models.Question>> CreateAsync(Core.Models.QuestionCreate question)
-        {
-            var data = new Core.Data.Question
-            {
-                Content = question.Content,
-                CreateDate = DateTimeOffset.Now
-            };
+        //[HttpPost]
+        //public async Task<ActionResult<Core.Models.QuestionRead>> CreateAsync(Core.Models.QuestionCreate question)
+        //{
+        //    var data = new Core.Data.Question
+        //    {
+        //        Content = question.Content,
+        //        CreateDate = DateTimeOffset.Now
+        //    };
 
-            _context.Questions.Add(data);
+        //    _context.Questions.Add(data);
 
-            await _context.SaveChangesAsync();
+        //    await _context.SaveChangesAsync();
 
-            var response = new Core.Models.Question
-            {
-                Content = data.Content,
-                CreateDate = data.CreateDate,
-                ID = data.ID
-            };
+        //    var response = new Core.Models.QuestionRead
+        //    {
+        //        Content = data.Content,
+        //        CreateDate = data.CreateDate,
+        //        ID = data.ID
+        //    };
 
-            return this.CreatedAtAction("Get", new { id = data.ID }, response);
-        }
+        //    return this.CreatedAtAction("Get", new { id = data.ID }, response);
+        //}
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
-        {
-            var question = await _context.Questions.FindAsync(id);
-            if (question == null)
-            {
-                return NotFound();
-            }
+        //[HttpDelete("{id}")]
+        //public async Task<ActionResult> Delete(int id)
+        //{
+        //    var question = await _context.Questions.FindAsync(id);
+        //    if (question == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            _context.Questions.Remove(question);
-            await _context.SaveChangesAsync();
+        //    _context.Questions.Remove(question);
+        //    await _context.SaveChangesAsync();
 
-            return this.NoContent();
-        }
+        //    return this.NoContent();
+        //}
     }
 }
