@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using QAEngine.Infra.Data;
+using QAEngine.Core.Services;
+using QAEngine.Core.Repositories;
 
 namespace QAEngine.Api
 {
@@ -20,6 +22,8 @@ namespace QAEngine.Api
         {
             services.AddDbContext<QAEngineContext>(options => options.UseInMemoryDatabase("QAEngine"));
             services.AddControllers();
+            services.AddScoped<IQuestionsService, QuestionsService>();
+            services.AddScoped<IQuestionsRepository, QuestionsRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
