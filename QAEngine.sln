@@ -3,20 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QAEngine.Api", "QAEngine.Api\QAEngine.Api.csproj", "{44380AA0-EDE5-494F-948D-92B5808229BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QAEngine.Api", "src\QAEngine.Api\QAEngine.Api.csproj", "{44380AA0-EDE5-494F-948D-92B5808229BC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QAEngine.Core", "QAEngine.Core\QAEngine.Core.csproj", "{BC266B3E-5CF2-49C0-8F4A-F886FFFD90DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QAEngine.Core", "src\QAEngine.Core\QAEngine.Core.csproj", "{BC266B3E-5CF2-49C0-8F4A-F886FFFD90DA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QAEngine.Infra", "src\QAEngine.Infra\QAEngine.Infra.csproj", "{3CE9A92F-76AB-4895-BF27-43D71ED406F2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AAE15FF2-5E06-45D2-B69D-F13BB84D0CFC}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QAEngine.Infra", "QAEngine.Infra\QAEngine.Infra.csproj", "{3CE9A92F-76AB-4895-BF27-43D71ED406F2}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{979C8E41-718C-4CA7-A40A-086864CAFDEB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B8263849-BE7C-4E2E-B41A-CF7895C26AC5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7E0B2187-5B7E-4693-98CC-DD244E6D0215}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,9 +39,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{44380AA0-EDE5-494F-948D-92B5808229BC} = {979C8E41-718C-4CA7-A40A-086864CAFDEB}
-		{BC266B3E-5CF2-49C0-8F4A-F886FFFD90DA} = {979C8E41-718C-4CA7-A40A-086864CAFDEB}
-		{3CE9A92F-76AB-4895-BF27-43D71ED406F2} = {979C8E41-718C-4CA7-A40A-086864CAFDEB}
+		{44380AA0-EDE5-494F-948D-92B5808229BC} = {7E0B2187-5B7E-4693-98CC-DD244E6D0215}
+		{BC266B3E-5CF2-49C0-8F4A-F886FFFD90DA} = {7E0B2187-5B7E-4693-98CC-DD244E6D0215}
+		{3CE9A92F-76AB-4895-BF27-43D71ED406F2} = {7E0B2187-5B7E-4693-98CC-DD244E6D0215}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70F6F9E1-B6F8-4DB7-A314-58B2091710AF}
