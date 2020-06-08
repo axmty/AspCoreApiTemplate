@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QAEngine.Core.Data;
+using QAEngine.Core.Repositories;
 using QAEngine.Infra.Data;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace QAEngine.Core.Repositories
+namespace QAEngine.Infra.Repositories
 {
     public class QuestionsRepository : IQuestionsRepository
     {

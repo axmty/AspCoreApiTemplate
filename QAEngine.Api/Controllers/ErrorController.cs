@@ -15,7 +15,10 @@ namespace QAEngine.Api.Controllers
             var exceptionHandlerPathFeature = this.HttpContext.Features.Get<IExceptionHandlerPathFeature>();
             var detail = exceptionHandlerPathFeature?.Error.Message;
 
-            return this.Problem(detail: detail, statusCode: (int)HttpStatusCode.InternalServerError, title: "An error occured.");
+            return this.Problem(
+                detail: detail, 
+                statusCode: (int)HttpStatusCode.InternalServerError, 
+                title: "An error occured.");
         }
     }
 }
