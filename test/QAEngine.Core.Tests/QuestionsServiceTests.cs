@@ -15,10 +15,10 @@ namespace QAEngine.Core.Tests
         [Fact]
         public async Task GetByIdAsync_WhenRepositoryMethodGetByIdAsync_ReturnsNull_ThrowsNotFoundException()
         {
-            var service = QuestionServiceBuilder
-                .Init()
-                .ConfigureRepository(r => r.GetByIdAsync(3), null)
-                .Build();
+            var service = QuestionsServiceBuilder.Configure(builder =>
+            {
+                builder.MockedQuestionsRepository.Setup(r => r.GetByIdAsync(3)).ReturnsAsync((Data.Question)null);
+            }).Build();
 
             var invoke = service.Invoking(s => s.GetByIdAsync(3));
 
@@ -41,40 +41,44 @@ namespace QAEngine.Core.Tests
                 CreateDate = returnedData.CreateDate
             };
 
-            var service = QuestionServiceBuilder
-                .Init()
-                .ConfigureRepository(r => r.GetByIdAsync(3), returnedData)
-                .Build();
+            var service = QuestionsServiceBuilder.Configure(builder =>
+            {
+                builder.MockedQuestionsRepository.Setup(r => r.GetByIdAsync(3)).ReturnsAsync(returnedData);
+            }).Build();
 
             var result = await service.GetByIdAsync(3);
 
             result.Should().BeEquivalentTo(expectedModel);
         }
 
-        private class QuestionServiceBuilder
+        private class QuestionsServiceBuilder
         {
-            private readonly Mock<IQuestionsRepository> _mockedQuestionsRepository;
-
-            private QuestionServiceBuilder()
+            private QuestionsServiceBuilder()
             {
-                _mockedQuestionsRepository = new Mock<IQuestionsRepository>();
+                this.MockedQuestionsRepository = new Mock<IQuestionsRepository>();
             }
+            
+            public Mock<IQuestionsRepository> MockedQuestionsRepository { get; }
 
-            public static QuestionServiceBuilder Init()
+            public static QuestionsServiceBuilder Configure(Action<QuestionsServiceBuilder> options)
             {
-                return new QuestionServiceBuilder();
+                var builder = new QuestionsServiceBuilder();
+                
+                options(builder);
+
+                return builder;
             }
 
             public QuestionsService Build()
             {
-                return new QuestionsService(_mockedQuestionsRepository.Object);
+                return new QuestionsService(this.MockedQuestionsRepository.Object);
             }
 
-            public QuestionServiceBuilder ConfigureRepository<TResult>(
+            public QuestionsServiceBuilder ConfigureRepository<TResult>(
                 Expression<Func<IQuestionsRepository, Task<TResult>>> expression,
                 TResult returnedValue)
             {
-                _mockedQuestionsRepository.Setup(expression).ReturnsAsync(returnedValue);
+                this.MockedQuestionsRepository.Setup(expression).ReturnsAsync(returnedValue);
 
                 return this;
             }
