@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using QAEngine.Core.Exceptions;
 using QAEngine.Core.Models;
 using QAEngine.Core.Repositories;
 
@@ -28,6 +29,11 @@ namespace QAEngine.Core.Services
         public async Task<QuestionRead> GetAsync(int id)
         {
             var data = await _questionsRepository.GetAsync(id);
+
+            if (data is null)
+            {
+                throw new NotFoundException($"Question [{id}] does not exist.");
+            }
 
             return new QuestionRead
             {
