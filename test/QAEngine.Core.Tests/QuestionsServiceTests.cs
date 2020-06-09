@@ -14,6 +14,7 @@ namespace QAEngine.Core.Tests
     public class QuestionsServiceTests
     {
         [Fact]
+        [Trait(nameof(Constants.TraitCategory), nameof(QuestionsService.GetByIdAsync))]
         public async Task GetByIdAsync_WhenRepositoryMethodGetByIdAsync_ReturnsNull_ThrowsNotFoundException()
         {
             var service = QuestionsServiceBuilder.Configure(builder =>
@@ -27,6 +28,7 @@ namespace QAEngine.Core.Tests
         }
 
         [Fact]
+        [Trait(nameof(Constants.TraitCategory), nameof(QuestionsService.GetByIdAsync))]
         public async Task GetByIdAsync_WhenRepositoryMethodGetByIdAsync_ReturnsData_ReturnsExpectedModel()
         {
             var returnedData = new Data.Question
