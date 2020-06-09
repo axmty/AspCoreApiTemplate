@@ -24,7 +24,7 @@ namespace QAEngine.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult> GetAsync(int id)
         {
-            return this.Ok(await _questionsService.GetAsync(id));
+            return this.Ok(await _questionsService.GetByIdAsync(id));
         }
 
         //[HttpPost]

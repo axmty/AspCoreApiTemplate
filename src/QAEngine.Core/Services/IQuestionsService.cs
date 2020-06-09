@@ -8,6 +8,6 @@ namespace QAEngine.Core.Services
     {
         Task<IEnumerable<QuestionRead>> GetAsync();
 
-        Task<QuestionRead> GetAsync(int id);
+        Task<QuestionRead> GetByIdAsync(int id);
     }
 }

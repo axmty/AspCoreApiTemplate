@@ -26,9 +26,9 @@ namespace QAEngine.Core.Services
             });
         }
 
-        public async Task<QuestionRead> GetAsync(int id)
+        public async Task<QuestionRead> GetByIdAsync(int id)
         {
-            var data = await _questionsRepository.GetAsync(id);
+            var data = await _questionsRepository.GetByIdAsync(id);
 
             if (data is null)
             {

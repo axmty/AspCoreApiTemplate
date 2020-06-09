@@ -21,7 +21,7 @@ namespace QAEngine.Infra.Repositories
             return await _context.Questions.ToListAsync();
         }
 
-        public async Task<Question> GetAsync(int id)
+        public async Task<Question> GetByIdAsync(int id)
         {
             return await _context.Questions.FindAsync(id);
         }
