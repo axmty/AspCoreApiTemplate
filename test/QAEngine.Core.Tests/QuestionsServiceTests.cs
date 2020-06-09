@@ -1,11 +1,12 @@
 using System;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
+using QAEngine.Core.Errors;
 using QAEngine.Core.Exceptions;
 using QAEngine.Core.Repositories;
 using QAEngine.Core.Services;
+using QAEngine.Tests.Utils;
 using Xunit;
 
 namespace QAEngine.Core.Tests
@@ -17,12 +18,12 @@ namespace QAEngine.Core.Tests
         {
             var service = QuestionsServiceBuilder.Configure(builder =>
             {
-                builder.MockedQuestionsRepository.Setup(r => r.GetByIdAsync(3)).ReturnsAsync((Data.Question)null);
+                builder.QuestionsRepository.Setup(r => r.GetByIdAsync(3)).ReturnsAsync((Data.Question)null);
             }).Build();
 
-            var invoke = service.Invoking(s => s.GetByIdAsync(3));
-
-            await invoke.Should().ThrowAsync<NotFoundException>();
+            await service.Invoking(s => s.GetByIdAsync(3)).Should().ThrowDomainExceptionAsync<NotFoundException>(
+                "Question [3] does not exist.",
+                ErrorCodes.Generic.NotFound);
         }
 
         [Fact]
@@ -43,7 +44,7 @@ namespace QAEngine.Core.Tests
 
             var service = QuestionsServiceBuilder.Configure(builder =>
             {
-                builder.MockedQuestionsRepository.Setup(r => r.GetByIdAsync(3)).ReturnsAsync(returnedData);
+                builder.QuestionsRepository.Setup(r => r.GetByIdAsync(3)).ReturnsAsync(returnedData);
             }).Build();
 
             var result = await service.GetByIdAsync(3);
@@ -55,10 +56,10 @@ namespace QAEngine.Core.Tests
         {
             private QuestionsServiceBuilder()
             {
-                this.MockedQuestionsRepository = new Mock<IQuestionsRepository>();
+                this.QuestionsRepository = new Mock<IQuestionsRepository>();
             }
             
-            public Mock<IQuestionsRepository> MockedQuestionsRepository { get; }
+            public Mock<IQuestionsRepository> QuestionsRepository { get; }
 
             public static QuestionsServiceBuilder Configure(Action<QuestionsServiceBuilder> options)
             {
@@ -71,16 +72,7 @@ namespace QAEngine.Core.Tests
 
             public QuestionsService Build()
             {
-                return new QuestionsService(this.MockedQuestionsRepository.Object);
-            }
-
-            public QuestionsServiceBuilder ConfigureRepository<TResult>(
-                Expression<Func<IQuestionsRepository, Task<TResult>>> expression,
-                TResult returnedValue)
-            {
-                this.MockedQuestionsRepository.Setup(expression).ReturnsAsync(returnedValue);
-
-                return this;
+                return new QuestionsService(this.QuestionsRepository.Object);
             }
         }
     }

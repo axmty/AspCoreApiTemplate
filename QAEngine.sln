@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{870FDEB8-A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QAEngine.Core.Tests", "test\QAEngine.Core.Tests\QAEngine.Core.Tests.csproj", "{9922B66E-4306-4D85-A8CB-8FB3FA090112}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QAEngine.Tests.Utils", "test\QAEngine.Tests.Utils\QAEngine.Tests.Utils.csproj", "{356657B3-E39F-492D-AE7F-43FBE872CCCC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,10 @@ Global
 		{9922B66E-4306-4D85-A8CB-8FB3FA090112}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9922B66E-4306-4D85-A8CB-8FB3FA090112}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9922B66E-4306-4D85-A8CB-8FB3FA090112}.Release|Any CPU.Build.0 = Release|Any CPU
+		{356657B3-E39F-492D-AE7F-43FBE872CCCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{356657B3-E39F-492D-AE7F-43FBE872CCCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{356657B3-E39F-492D-AE7F-43FBE872CCCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{356657B3-E39F-492D-AE7F-43FBE872CCCC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +57,7 @@ Global
 		{BC266B3E-5CF2-49C0-8F4A-F886FFFD90DA} = {7E0B2187-5B7E-4693-98CC-DD244E6D0215}
 		{3CE9A92F-76AB-4895-BF27-43D71ED406F2} = {7E0B2187-5B7E-4693-98CC-DD244E6D0215}
 		{9922B66E-4306-4D85-A8CB-8FB3FA090112} = {870FDEB8-A9F3-4F88-89A1-523C09486630}
+		{356657B3-E39F-492D-AE7F-43FBE872CCCC} = {870FDEB8-A9F3-4F88-89A1-523C09486630}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70F6F9E1-B6F8-4DB7-A314-58B2091710AF}
