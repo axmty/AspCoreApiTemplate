@@ -27,7 +27,16 @@ namespace QAEngine.Infra.Repositories
 
         public async Task<Question> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            using var connection = _sqlConnectionFactory.Create();
+
+            var question = await connection.QueryFirstOrDefaultAsync<Question>(
+                "SELECT * FROM Question WHERE QuestionID = @QuestionID",
+                new
+                {
+                    QuestionID = id
+                });
+
+            return question;
         }
     }
 }
