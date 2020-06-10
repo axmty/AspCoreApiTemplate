@@ -21,7 +21,7 @@ namespace QAEngine.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<QAEngineContext>(options => options.UseInMemoryDatabase("QAEngine"));
+            services.AddDbContext<QAEngineContext>(options => options.UseSqlServer("DatabaseConnection"));
             services.AddControllers();
             services.AddScoped<IQuestionsService, QuestionsService>();
             services.AddScoped<IQuestionsRepository, QuestionsRepository>();

@@ -1,0 +1,19 @@
+﻿USE [master]
+GO
+
+CREATE DATABASE [QAEngine]
+GO
+
+USE [QAEngine]
+GO
+
+CREATE TABLE [dbo].[Question](
+	[QuestionID] [int] IDENTITY(1,1) NOT NULL,
+	[Content] [nvarchar](255) NOT NULL,
+	[CreateDate] [datetimeoffset](7) NOT NULL,
+ CONSTRAINT [PK_Question] PRIMARY KEY CLUSTERED 
+(
+	[QuestionID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO

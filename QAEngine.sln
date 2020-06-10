@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QAEngine.Core.Tests", "test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QAEngine.Tests.Core", "test\QAEngine.Tests.Core\QAEngine.Tests.Core.csproj", "{356657B3-E39F-492D-AE7F-43FBE872CCCC}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "QAEngine.Database", "src\QAEngine.Database\QAEngine.Database.sqlproj", "{B186AB13-911F-44EC-A260-A5A099C71470}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,12 @@ Global
 		{356657B3-E39F-492D-AE7F-43FBE872CCCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{356657B3-E39F-492D-AE7F-43FBE872CCCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{356657B3-E39F-492D-AE7F-43FBE872CCCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B186AB13-911F-44EC-A260-A5A099C71470}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B186AB13-911F-44EC-A260-A5A099C71470}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B186AB13-911F-44EC-A260-A5A099C71470}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{B186AB13-911F-44EC-A260-A5A099C71470}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B186AB13-911F-44EC-A260-A5A099C71470}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B186AB13-911F-44EC-A260-A5A099C71470}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +66,7 @@ Global
 		{3CE9A92F-76AB-4895-BF27-43D71ED406F2} = {7E0B2187-5B7E-4693-98CC-DD244E6D0215}
 		{9922B66E-4306-4D85-A8CB-8FB3FA090112} = {870FDEB8-A9F3-4F88-89A1-523C09486630}
 		{356657B3-E39F-492D-AE7F-43FBE872CCCC} = {870FDEB8-A9F3-4F88-89A1-523C09486630}
+		{B186AB13-911F-44EC-A260-A5A099C71470} = {7E0B2187-5B7E-4693-98CC-DD244E6D0215}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70F6F9E1-B6F8-4DB7-A314-58B2091710AF}
