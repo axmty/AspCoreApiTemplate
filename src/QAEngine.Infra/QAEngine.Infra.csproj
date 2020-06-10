@@ -11,9 +11,5 @@
   <ItemGroup>
     <ProjectReference Include="..\QAEngine.Core\QAEngine.Core.csproj" />
   </ItemGroup>
-	
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
 
 </Project>
