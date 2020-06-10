@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Dapper;
 using QAEngine.Core.Data;
@@ -20,7 +19,7 @@ namespace QAEngine.Infra.Repositories
         {
             using var connection = _sqlConnectionFactory.Create();
 
-            var questions = await connection.QueryAsync<Question>("SELECT * FROM Question");
+            var questions = await connection.QueryAsync<Question>(Queries.Get);
 
             return questions;
         }
@@ -30,13 +29,20 @@ namespace QAEngine.Infra.Repositories
             using var connection = _sqlConnectionFactory.Create();
 
             var question = await connection.QueryFirstOrDefaultAsync<Question>(
-                "SELECT * FROM Question WHERE QuestionID = @QuestionID",
+                Queries.GetById,
                 new
                 {
                     QuestionID = id
                 });
 
             return question;
+        }
+
+        private static class Queries
+        {
+            public const string Get = @"SELECT * FROM Question";
+            
+            public const string GetById = @"SELECT * FROM Question WHERE QuestionID = @QuestionID";
         }
     }
 }
