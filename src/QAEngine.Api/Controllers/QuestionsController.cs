@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using QAEngine.Core.Models;
 using QAEngine.Core.Services;
 
 namespace QAEngine.Api.Controllers
@@ -27,28 +28,11 @@ namespace QAEngine.Api.Controllers
             return this.Ok(await _questionsService.GetByIdAsync(id));
         }
 
-        //[HttpPost]
-        //public async Task<ActionResult<Core.Models.QuestionRead>> CreateAsync(Core.Models.QuestionCreate question)
-        //{
-        //    var data = new Core.Data.Question
-        //    {
-        //        Content = question.Content,
-        //        CreateDate = DateTimeOffset.Now
-        //    };
-
-        //    _context.Questions.Add(data);
-
-        //    await _context.SaveChangesAsync();
-
-        //    var response = new Core.Models.QuestionRead
-        //    {
-        //        Content = data.Content,
-        //        CreateDate = data.CreateDate,
-        //        ID = data.ID
-        //    };
-
-        //    return this.CreatedAtAction("Get", new { id = data.ID }, response);
-        //}
+        [HttpPost]
+        public async Task<ActionResult<Question>> CreateAsync(QuestionCreate question)
+        {
+            return this.Ok(await _questionsService.CreateAsync(question));
+        }
 
         //[HttpDelete("{id}")]
         //public async Task<ActionResult> Delete(int id)

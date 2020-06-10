@@ -6,6 +6,8 @@ namespace QAEngine.Core.Services
 {
     public interface IQuestionsService
     {
+        Task<Question> CreateAsync(QuestionCreate question);
+
         Task<IEnumerable<Question>> GetAsync();
 
         Task<Question> GetByIdAsync(int id);

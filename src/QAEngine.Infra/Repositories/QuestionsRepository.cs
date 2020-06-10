@@ -15,28 +15,28 @@ namespace QAEngine.Infra.Repositories
             _sqlConnectionFactory = sqlConnectionFactory;
         }
 
-        public Task<IEnumerable<Question>> GetAsync()
+        public async Task<IEnumerable<Question>> GetAsync()
         {
             using var connection = _sqlConnectionFactory.Create();
 
-            return connection.QueryAsync<Question>(Queries.Get);
+            return await connection.QueryAsync<Question>(Queries.Get);
         }
 
-        public Task<Question> GetByIdAsync(int id)
+        public async Task<Question> GetByIdAsync(int id)
         {
             using var connection = _sqlConnectionFactory.Create();
 
-            return connection.QueryFirstOrDefaultAsync<Question>(Queries.GetById, new
+            return await connection.QueryFirstOrDefaultAsync<Question>(Queries.GetById, new
             {
                 QuestionID = id
             });
         }
 
-        public Task<int> CreateAsync(QuestionCreate question)
+        public async Task<int> CreateAsync(QuestionCreate question)
         {
             using var connection = _sqlConnectionFactory.Create();
 
-            return connection.ExecuteScalarAsync<int>(Queries.Create, question);
+            return await connection.ExecuteScalarAsync<int>(Queries.Create, question);
         }
 
         private static class Queries
