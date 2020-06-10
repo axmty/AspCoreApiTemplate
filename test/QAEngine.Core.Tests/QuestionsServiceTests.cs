@@ -32,15 +32,15 @@ namespace QAEngine.Core.Tests
                     CreateDate = DateTimeOffset.Parse("2020-01-01")
                 }
             };
-            var expected = new Models.QuestionRead[]
+            var expected = new Models.Question[]
             {
-                new Models.QuestionRead
+                new Models.Question
                 {
                     ID = returnedData[0].QuestionID,
                     Content = returnedData[0].Content,
                     CreateDate = returnedData[0].CreateDate
                 },
-                new Models.QuestionRead
+                new Models.Question
                 {
                     ID = returnedData[1].QuestionID,
                     Content = returnedData[1].Content,
@@ -84,7 +84,7 @@ namespace QAEngine.Core.Tests
                 Content = "content",
                 CreateDate = DateTimeOffset.Parse("2020-01-01")
             };
-            var expected = new Models.QuestionRead
+            var expected = new Models.Question
             {
                 ID = returnedData.QuestionID,
                 Content = returnedData.Content,

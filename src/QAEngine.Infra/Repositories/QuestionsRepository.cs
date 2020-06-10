@@ -15,34 +15,39 @@ namespace QAEngine.Infra.Repositories
             _sqlConnectionFactory = sqlConnectionFactory;
         }
 
-        public async Task<IEnumerable<Question>> GetAsync()
+        public Task<IEnumerable<Question>> GetAsync()
         {
             using var connection = _sqlConnectionFactory.Create();
 
-            var questions = await connection.QueryAsync<Question>(Queries.Get);
-
-            return questions;
+            return connection.QueryAsync<Question>(Queries.Get);
         }
 
-        public async Task<Question> GetByIdAsync(int id)
+        public Task<Question> GetByIdAsync(int id)
         {
             using var connection = _sqlConnectionFactory.Create();
 
-            var question = await connection.QueryFirstOrDefaultAsync<Question>(
-                Queries.GetById,
-                new
-                {
-                    QuestionID = id
-                });
+            return connection.QueryFirstOrDefaultAsync<Question>(Queries.GetById, new
+            {
+                QuestionID = id
+            });
+        }
 
-            return question;
+        public Task<int> CreateAsync(QuestionCreate question)
+        {
+            using var connection = _sqlConnectionFactory.Create();
+
+            return connection.ExecuteScalarAsync<int>(Queries.Create, question);
         }
 
         private static class Queries
         {
-            public const string Get = @"SELECT * FROM Question";
+            public const string Get = @"SELECT * FROM [Question]";
             
-            public const string GetById = @"SELECT * FROM Question WHERE QuestionID = @QuestionID";
+            public const string GetById = @"SELECT * FROM [Question] WHERE [QuestionID] = @QuestionID";
+
+            public const string Create = @"
+                INSERT INTO [dbo].[Question] ([Content], [CreateDate]) VALUES (@Content, @CreateDate);
+                SELECT SCOPE_IDENTITY()";
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using QAEngine.Core.Exceptions;
-using QAEngine.Core.Models;
 using QAEngine.Core.Repositories;
 
 namespace QAEngine.Core.Services
@@ -16,9 +16,9 @@ namespace QAEngine.Core.Services
             _questionsRepository = questionsRepository;
         }
 
-        public async Task<IEnumerable<QuestionRead>> GetAsync()
+        public async Task<IEnumerable<Models.Question>> GetAsync()
         {
-            return (await _questionsRepository.GetAsync()).Select(q => new QuestionRead
+            return (await _questionsRepository.GetAsync()).Select(q => new Models.Question
             {
                 Content = q.Content,
                 CreateDate = q.CreateDate,
@@ -26,7 +26,7 @@ namespace QAEngine.Core.Services
             });
         }
 
-        public async Task<QuestionRead> GetByIdAsync(int id)
+        public async Task<Models.Question> GetByIdAsync(int id)
         {
             var data = await _questionsRepository.GetByIdAsync(id);
 
@@ -35,12 +35,23 @@ namespace QAEngine.Core.Services
                 throw new NotFoundException($"Question [{id}] does not exist.");
             }
 
-            return new QuestionRead
+            return new Models.Question
             {
                 Content = data.Content,
                 CreateDate = data.CreateDate,
                 ID = data.QuestionID
             };
+        }
+
+        public async Task<Models.Question> CreateAsync(Models.QuestionCreate question)
+        {
+            var id = await _questionsRepository.CreateAsync(new Data.QuestionCreate
+            {
+                Content = question.Content,
+                CreateDate = DateTimeOffset.Now
+            });
+
+            return await this.GetByIdAsync(id);
         }
     }
 }

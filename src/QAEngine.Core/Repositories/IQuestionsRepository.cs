@@ -6,10 +6,10 @@ namespace QAEngine.Core.Repositories
 {
     public interface IQuestionsRepository
     {
-
-
         Task<IEnumerable<Question>> GetAsync();
 
         Task<Question> GetByIdAsync(int id);
+
+        Task<int> CreateAsync(QuestionCreate question);
     }
 }
