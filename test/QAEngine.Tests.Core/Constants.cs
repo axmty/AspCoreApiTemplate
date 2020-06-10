@@ -1,4 +1,4 @@
-﻿namespace QAEngine.Tests.Utils
+﻿namespace QAEngine.Tests.Core
 {
     public static class Constants
     {

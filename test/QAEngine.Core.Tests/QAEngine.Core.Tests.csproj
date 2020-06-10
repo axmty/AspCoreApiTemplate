@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\QAEngine.Core\QAEngine.Core.csproj" />
-    <ProjectReference Include="..\QAEngine.Tests.Utils\QAEngine.Tests.Utils.csproj" />
+    <ProjectReference Include="..\QAEngine.Tests.Core\QAEngine.Tests.Core.csproj" />
   </ItemGroup>
 
 </Project>

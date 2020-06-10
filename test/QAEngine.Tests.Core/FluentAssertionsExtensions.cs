@@ -3,7 +3,7 @@ using FluentAssertions;
 using FluentAssertions.Specialized;
 using QAEngine.Core.Exceptions;
 
-namespace QAEngine.Tests.Utils
+namespace QAEngine.Tests.Core
 {
     public static class FluentAssertionsExtensions
     {

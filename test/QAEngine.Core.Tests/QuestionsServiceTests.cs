@@ -6,7 +6,7 @@ using QAEngine.Core.Errors;
 using QAEngine.Core.Exceptions;
 using QAEngine.Core.Repositories;
 using QAEngine.Core.Services;
-using QAEngine.Tests.Utils;
+using QAEngine.Tests.Core;
 using Xunit;
 
 namespace QAEngine.Core.Tests
@@ -17,10 +17,12 @@ namespace QAEngine.Core.Tests
         [Trait(nameof(Constants.TraitCategory), nameof(QuestionsService.GetByIdAsync))]
         public async Task GetByIdAsync_WhenRepositoryMethodGetByIdAsync_ReturnsNull_ThrowsNotFoundException()
         {
-            var service = QuestionsServiceBuilder.Configure(builder =>
-            {
-                builder.QuestionsRepository.Setup(r => r.GetByIdAsync(3)).ReturnsAsync((Data.Question)null);
-            }).Build();
+            var service = QuestionsServiceBuilder
+                .Configure(builder =>
+                {
+                    builder.QuestionsRepository.Setup(r => r.GetByIdAsync(3)).ReturnsAsync((Data.Question)null);
+                })
+                .Build();
 
             await service.Invoking(s => s.GetByIdAsync(3)).Should().ThrowDomainExceptionAsync<NotFoundException>(
                 "Question [3] does not exist.",
@@ -44,17 +46,19 @@ namespace QAEngine.Core.Tests
                 CreateDate = returnedData.CreateDate
             };
 
-            var service = QuestionsServiceBuilder.Configure(builder =>
-            {
-                builder.QuestionsRepository.Setup(r => r.GetByIdAsync(3)).ReturnsAsync(returnedData);
-            }).Build();
+            var service = QuestionsServiceBuilder
+                .Configure(builder =>
+                {
+                    builder.QuestionsRepository.Setup(r => r.GetByIdAsync(3)).ReturnsAsync(returnedData);
+                })
+                .Build();
 
             var result = await service.GetByIdAsync(3);
 
             result.Should().BeEquivalentTo(expectedModel);
         }
 
-        private class QuestionsServiceBuilder
+        private class QuestionsServiceBuilder : SubjectBuilder<QuestionsService, QuestionsServiceBuilder>
         {
             private QuestionsServiceBuilder()
             {
@@ -63,16 +67,7 @@ namespace QAEngine.Core.Tests
             
             public Mock<IQuestionsRepository> QuestionsRepository { get; }
 
-            public static QuestionsServiceBuilder Configure(Action<QuestionsServiceBuilder> options)
-            {
-                var builder = new QuestionsServiceBuilder();
-                
-                options(builder);
-
-                return builder;
-            }
-
-            public QuestionsService Build()
+            public override QuestionsService Build()
             {
                 return new QuestionsService(this.QuestionsRepository.Object);
             }
