@@ -1,11 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using QAEngine.Core.Data;
 using QAEngine.Core.Repositories;
 using QAEngine.Core.Services;
-using QAEngine.Infra.Data;
 using QAEngine.Infra.Repositories;
 
 namespace QAEngine.Api
@@ -21,10 +20,10 @@ namespace QAEngine.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<QAEngineContext>(options => options.UseSqlServer("DatabaseConnection"));
             services.AddControllers();
             services.AddScoped<IQuestionsService, QuestionsService>();
             services.AddScoped<IQuestionsRepository, QuestionsRepository>();
+            services.AddSingleton<ISqlConnectionFactory>(new SqlConnectionFactory(this.Configuration.GetConnectionString("Database")));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

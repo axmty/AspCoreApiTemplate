@@ -1,29 +1,33 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+using Dapper;
 using QAEngine.Core.Data;
 using QAEngine.Core.Repositories;
-using QAEngine.Infra.Data;
 
 namespace QAEngine.Infra.Repositories
 {
     public class QuestionsRepository : IQuestionsRepository
     {
-        private readonly QAEngineContext _context;
+        private readonly ISqlConnectionFactory _sqlConnectionFactory;
 
-        public QuestionsRepository(QAEngineContext context)
+        public QuestionsRepository(ISqlConnectionFactory sqlConnectionFactory)
         {
-            _context = context;
+            _sqlConnectionFactory = sqlConnectionFactory;
         }
 
         public async Task<IEnumerable<Question>> GetAsync()
         {
-            return await _context.Questions.ToListAsync();
+            using var connection = _sqlConnectionFactory.Create();
+
+            var questions = await connection.QueryAsync<Question>("SELECT * FROM Question");
+
+            return questions;
         }
 
         public async Task<Question> GetByIdAsync(int id)
         {
-            return await _context.Questions.FindAsync(id);
+            throw new NotImplementedException();
         }
     }
 }

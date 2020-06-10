@@ -22,7 +22,7 @@ namespace QAEngine.Core.Services
             {
                 Content = q.Content,
                 CreateDate = q.CreateDate,
-                ID = q.ID
+                ID = q.QuestionID
             });
         }
 
@@ -39,7 +39,7 @@ namespace QAEngine.Core.Services
             {
                 Content = data.Content,
                 CreateDate = data.CreateDate,
-                ID = data.ID
+                ID = data.QuestionID
             };
         }
     }
