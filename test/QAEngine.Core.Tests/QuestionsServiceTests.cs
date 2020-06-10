@@ -14,6 +14,52 @@ namespace QAEngine.Core.Tests
     public class QuestionsServiceTests
     {
         [Fact]
+        [Trait(nameof(Constants.TraitCategory), nameof(QuestionsService.GetAsync))]
+        public async Task GetAsync_WhenRepositoryMethodGetAsync_ReturnsData_ReturnsExpectedCollection()
+        {
+            var returnedData = new Data.Question[]
+            {
+                new Data.Question 
+                {
+                    ID = 3,
+                    Content = "content",
+                    CreateDate = DateTimeOffset.Parse("2019-01-01")
+                },
+                new Data.Question
+                {
+                    ID = 5,
+                    Content = "other content",
+                    CreateDate = DateTimeOffset.Parse("2020-01-01")
+                }
+            };
+            var expected = new Models.QuestionRead[]
+            {
+                new Models.QuestionRead
+                {
+                    ID = returnedData[0].ID,
+                    Content = returnedData[0].Content,
+                    CreateDate = returnedData[0].CreateDate
+                },
+                new Models.QuestionRead
+                {
+                    ID = returnedData[1].ID,
+                    Content = returnedData[1].Content,
+                    CreateDate = returnedData[1].CreateDate
+                }
+            };
+
+            var builder = QuestionsServiceBuilder.Configure(builder =>
+            {
+                builder.QuestionsRepository.Setup(r => r.GetAsync()).ReturnsAsync(returnedData);
+            });
+
+            var result = await builder.Build().GetAsync();
+
+            result.Should().BeEquivalentTo(expected);
+            builder.QuestionsRepository.Verify(r => r.GetAsync(), Times.Once);
+        }
+
+        [Fact]
         [Trait(nameof(Constants.TraitCategory), nameof(QuestionsService.GetByIdAsync))]
         public async Task GetByIdAsync_WhenRepositoryMethodGetByIdAsync_ReturnsNull_ThrowsNotFoundException()
         {
@@ -30,7 +76,7 @@ namespace QAEngine.Core.Tests
 
         [Fact]
         [Trait(nameof(Constants.TraitCategory), nameof(QuestionsService.GetByIdAsync))]
-        public async Task GetByIdAsync_WhenRepositoryMethodGetByIdAsync_ReturnsData_ReturnsExpectedModel()
+        public async Task GetByIdAsync_WhenRepositoryMethodGetByIdAsync_ReturnsData_ReturnsExpected()
         {
             var returnedData = new Data.Question
             {
@@ -38,7 +84,7 @@ namespace QAEngine.Core.Tests
                 Content = "content",
                 CreateDate = DateTimeOffset.Parse("2020-01-01")
             };
-            var expectedModel = new Models.QuestionRead
+            var expected = new Models.QuestionRead
             {
                 ID = returnedData.ID,
                 Content = returnedData.Content,
@@ -52,7 +98,7 @@ namespace QAEngine.Core.Tests
 
             var result = await builder.Build().GetByIdAsync(3);
 
-            result.Should().BeEquivalentTo(expectedModel);
+            result.Should().BeEquivalentTo(expected);
             builder.QuestionsRepository.Verify(r => r.GetByIdAsync(3), Times.Once);
         }
 
