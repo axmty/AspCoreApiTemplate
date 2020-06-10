@@ -17,16 +17,15 @@ namespace QAEngine.Core.Tests
         [Trait(nameof(Constants.TraitCategory), nameof(QuestionsService.GetByIdAsync))]
         public async Task GetByIdAsync_WhenRepositoryMethodGetByIdAsync_ReturnsNull_ThrowsNotFoundException()
         {
-            var service = QuestionsServiceBuilder
-                .Configure(builder =>
-                {
-                    builder.QuestionsRepository.Setup(r => r.GetByIdAsync(3)).ReturnsAsync((Data.Question)null);
-                })
-                .Build();
+            var builder = QuestionsServiceBuilder.Configure(builder =>
+            {
+                builder.QuestionsRepository.Setup(r => r.GetByIdAsync(3)).ReturnsAsync((Data.Question)null);
+            });
 
-            await service.Invoking(s => s.GetByIdAsync(3)).Should().ThrowDomainExceptionAsync<NotFoundException>(
+            await builder.Build().Invoking(s => s.GetByIdAsync(3)).Should().ThrowDomainExceptionAsync<NotFoundException>(
                 "Question [3] does not exist.",
                 ErrorCodes.Generic.NotFound);
+            builder.QuestionsRepository.Verify(r => r.GetByIdAsync(3), Times.Once);
         }
 
         [Fact]
@@ -46,16 +45,15 @@ namespace QAEngine.Core.Tests
                 CreateDate = returnedData.CreateDate
             };
 
-            var service = QuestionsServiceBuilder
-                .Configure(builder =>
-                {
-                    builder.QuestionsRepository.Setup(r => r.GetByIdAsync(3)).ReturnsAsync(returnedData);
-                })
-                .Build();
+            var builder = QuestionsServiceBuilder.Configure(builder =>
+            {
+                builder.QuestionsRepository.Setup(r => r.GetByIdAsync(3)).ReturnsAsync(returnedData);
+            });
 
-            var result = await service.GetByIdAsync(3);
+            var result = await builder.Build().GetByIdAsync(3);
 
             result.Should().BeEquivalentTo(expectedModel);
+            builder.QuestionsRepository.Verify(r => r.GetByIdAsync(3), Times.Once);
         }
 
         private class QuestionsServiceBuilder : SubjectBuilder<QuestionsService, QuestionsServiceBuilder>
