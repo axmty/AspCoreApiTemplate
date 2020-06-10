@@ -60,16 +60,16 @@ namespace QAEngine.Core.Tests
 
         private class QuestionsServiceBuilder : SubjectBuilder<QuestionsService, QuestionsServiceBuilder>
         {
-            private QuestionsServiceBuilder()
-            {
-                this.QuestionsRepository = new Mock<IQuestionsRepository>();
-            }
-            
-            public Mock<IQuestionsRepository> QuestionsRepository { get; }
+            public Mock<IQuestionsRepository> QuestionsRepository { get; private set; }
 
             public override QuestionsService Build()
             {
                 return new QuestionsService(this.QuestionsRepository.Object);
+            }
+
+            protected override void Init()
+            {
+                this.QuestionsRepository = new Mock<IQuestionsRepository>();
             }
         }
     }
