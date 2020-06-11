@@ -23,7 +23,7 @@ namespace QAEngine.Domain.Services
             {
                 Content = data.Content,
                 CreateDate = data.CreateDate,
-                ID = data.ID,
+                Id = data.Id,
                 IsClosed = data.IsClosed
             });
         }
@@ -41,7 +41,7 @@ namespace QAEngine.Domain.Services
             {
                 Content = data.Content,
                 CreateDate = data.CreateDate,
-                ID = data.ID,
+                Id = data.Id,
                 IsClosed = data.IsClosed
             };
         }

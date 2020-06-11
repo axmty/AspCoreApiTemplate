@@ -4,7 +4,7 @@ namespace QAEngine.Domain.Resources
 {
     public class QuestionResponse
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         public string Content { get; set; }
 

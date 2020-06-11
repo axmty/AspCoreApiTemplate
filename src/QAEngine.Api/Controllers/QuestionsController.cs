@@ -29,7 +29,7 @@ namespace QAEngine.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<QuestionResponse>> CreateAsync(QuestionCreateRequest question)
+        public async Task<ActionResult<QuestionResponse>> CreateAsync([FromBody]QuestionCreateRequest question)
         {
             var createdQuestionID = await _questionsService.CreateAsync(question);
             return this.CreatedAtAction(nameof(GetAsync), new { id = createdQuestionID });

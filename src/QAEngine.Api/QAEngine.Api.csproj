@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\QAEngine.Domain\QAEngine.Domain.csproj" />
     <ProjectReference Include="..\QAEngine.Infra\QAEngine.Infra.csproj" />
   </ItemGroup>

@@ -22,14 +22,14 @@ namespace QAEngine.Domain.Tests
             {
                 new Question
                 {
-                    ID = 3,
+                    Id = 3,
                     Content = "content",
                     CreateDate = DateTimeOffset.Parse("2019-01-01"),
                     IsClosed = true
                 },
                 new Question
                 {
-                    ID = 5,
+                    Id = 5,
                     Content = "other content",
                     CreateDate = DateTimeOffset.Parse("2020-01-01"),
                     IsClosed = false
@@ -39,14 +39,14 @@ namespace QAEngine.Domain.Tests
             {
                 new QuestionResponse
                 {
-                    ID = returnedData[0].ID,
+                    Id = returnedData[0].Id,
                     Content = returnedData[0].Content,
                     CreateDate = returnedData[0].CreateDate,
                     IsClosed = returnedData[0].IsClosed
                 },
                 new QuestionResponse
                 {
-                    ID = returnedData[1].ID,
+                    Id = returnedData[1].Id,
                     Content = returnedData[1].Content,
                     CreateDate = returnedData[1].CreateDate,
                     IsClosed = returnedData[1].IsClosed
@@ -85,14 +85,14 @@ namespace QAEngine.Domain.Tests
         {
             var returnedData = new Question
             {
-                ID = 3,
+                Id = 3,
                 Content = "content",
                 CreateDate = DateTimeOffset.Parse("2020-01-01"),
                 IsClosed = true
             };
             var expected = new QuestionResponse
             {
-                ID = returnedData.ID,
+                Id = returnedData.Id,
                 Content = returnedData.Content,
                 CreateDate = returnedData.CreateDate,
                 IsClosed = returnedData.IsClosed
