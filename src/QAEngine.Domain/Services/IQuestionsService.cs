@@ -6,7 +6,7 @@ namespace QAEngine.Domain.Services
 {
     public interface IQuestionsService
     {
-        Task<QuestionResponse> CreateAsync(QuestionCreateRequest question);
+        Task<int> CreateAsync(QuestionCreateRequest question);
 
         Task<IEnumerable<QuestionResponse>> ListAsync();
 

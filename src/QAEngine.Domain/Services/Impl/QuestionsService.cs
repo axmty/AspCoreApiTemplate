@@ -46,15 +46,13 @@ namespace QAEngine.Domain.Services
             };
         }
 
-        public async Task<QuestionResponse> CreateAsync(QuestionCreateRequest question)
+        public async Task<int> CreateAsync(QuestionCreateRequest question)
         {
-            var id = await _questionsRepository.CreateAsync(new Persistence.QuestionCreate
+            return await _questionsRepository.CreateAsync(new QuestionCreate
             {
                 Content = question.Content,
                 CreateDate = DateTimeOffset.Now
             });
-
-            return await this.GetByIdAsync(id);
         }
     }
 }

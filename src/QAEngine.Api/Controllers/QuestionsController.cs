@@ -7,7 +7,7 @@ namespace QAEngine.Api.Controllers
 {
     [Route("api/questions")]
     [ApiController]
-    public class QuestionsController : ControllerBase
+    public class QuestionsController : ApiController
     {
         private readonly IQuestionsService _questionsService;
 
@@ -31,7 +31,8 @@ namespace QAEngine.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<QuestionResponse>> CreateAsync(QuestionCreateRequest question)
         {
-            return this.CreatedAtAction("Get", await _questionsService.CreateAsync(question));
+            var createdQuestionID = await _questionsService.CreateAsync(question);
+            return this.CreatedAtAction(nameof(GetAsync), new { id = createdQuestionID });
         }
     }
 }
