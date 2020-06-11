@@ -18,11 +18,12 @@ namespace QAEngine.Core.Services
 
         public async Task<IEnumerable<Models.Question>> GetAsync()
         {
-            return (await _questionsRepository.GetAsync()).Select(q => new Models.Question
+            return (await _questionsRepository.GetAsync()).Select(data => new Models.Question
             {
-                Content = q.Content,
-                CreateDate = q.CreateDate,
-                ID = q.ID
+                Content = data.Content,
+                CreateDate = data.CreateDate,
+                ID = data.ID,
+                IsClosed = data.IsClosed
             });
         }
 
@@ -39,7 +40,8 @@ namespace QAEngine.Core.Services
             {
                 Content = data.Content,
                 CreateDate = data.CreateDate,
-                ID = data.ID
+                ID = data.ID,
+                IsClosed = data.IsClosed
             };
         }
 

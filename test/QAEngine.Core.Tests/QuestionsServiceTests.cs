@@ -14,7 +14,7 @@ namespace QAEngine.Core.Tests
     public class QuestionsServiceTests
     {
         [Fact]
-        [Trait(nameof(Constants.TraitCategory), nameof(QuestionsService.GetAsync))]
+        [Trait(Constants.TraitCategory, nameof(QuestionsService.GetAsync))]
         public async Task GetAsync_WhenRepositoryMethodGetAsync_ReturnsData_ReturnsExpectedCollection()
         {
             var returnedData = new Data.Question[]
@@ -23,13 +23,15 @@ namespace QAEngine.Core.Tests
                 {
                     ID = 3,
                     Content = "content",
-                    CreateDate = DateTimeOffset.Parse("2019-01-01")
+                    CreateDate = DateTimeOffset.Parse("2019-01-01"),
+                    IsClosed = true
                 },
                 new Data.Question
                 {
                     ID = 5,
                     Content = "other content",
-                    CreateDate = DateTimeOffset.Parse("2020-01-01")
+                    CreateDate = DateTimeOffset.Parse("2020-01-01"),
+                    IsClosed = false
                 }
             };
             var expected = new Models.Question[]
@@ -38,13 +40,15 @@ namespace QAEngine.Core.Tests
                 {
                     ID = returnedData[0].ID,
                     Content = returnedData[0].Content,
-                    CreateDate = returnedData[0].CreateDate
+                    CreateDate = returnedData[0].CreateDate,
+                    IsClosed = returnedData[0].IsClosed
                 },
                 new Models.Question
                 {
                     ID = returnedData[1].ID,
                     Content = returnedData[1].Content,
-                    CreateDate = returnedData[1].CreateDate
+                    CreateDate = returnedData[1].CreateDate,
+                    IsClosed = returnedData[1].IsClosed
                 }
             };
 
@@ -60,7 +64,7 @@ namespace QAEngine.Core.Tests
         }
 
         [Fact]
-        [Trait(nameof(Constants.TraitCategory), nameof(QuestionsService.GetByIdAsync))]
+        [Trait(Constants.TraitCategory, nameof(QuestionsService.GetByIdAsync))]
         public async Task GetByIdAsync_WhenRepositoryMethodGetByIdAsync_ReturnsNull_ThrowsNotFoundException()
         {
             var builder = QuestionsServiceBuilder.Configure(builder =>
@@ -75,20 +79,22 @@ namespace QAEngine.Core.Tests
         }
 
         [Fact]
-        [Trait(nameof(Constants.TraitCategory), nameof(QuestionsService.GetByIdAsync))]
+        [Trait(Constants.TraitCategory, nameof(QuestionsService.GetByIdAsync))]
         public async Task GetByIdAsync_WhenRepositoryMethodGetByIdAsync_ReturnsData_ReturnsExpected()
         {
             var returnedData = new Data.Question
             {
                 ID = 3,
                 Content = "content",
-                CreateDate = DateTimeOffset.Parse("2020-01-01")
+                CreateDate = DateTimeOffset.Parse("2020-01-01"),
+                IsClosed = true
             };
             var expected = new Models.Question
             {
                 ID = returnedData.ID,
                 Content = returnedData.Content,
-                CreateDate = returnedData.CreateDate
+                CreateDate = returnedData.CreateDate,
+                IsClosed = returnedData.IsClosed
             };
 
             var builder = QuestionsServiceBuilder.Configure(builder =>

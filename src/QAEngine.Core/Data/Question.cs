@@ -9,5 +9,7 @@ namespace QAEngine.Core.Data
         public string Content { get; set; }
 
         public DateTimeOffset CreateDate { get; set; }
+
+        public bool IsClosed { get; set; }
     }
 }
