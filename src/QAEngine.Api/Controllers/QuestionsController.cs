@@ -33,20 +33,5 @@ namespace QAEngine.Api.Controllers
         {
             return this.Ok(await _questionsService.CreateAsync(question));
         }
-
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult> Delete(int id)
-        //{
-        //    var question = await _context.Questions.FindAsync(id);
-        //    if (question == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _context.Questions.Remove(question);
-        //    await _context.SaveChangesAsync();
-
-        //    return this.NoContent();
-        //}
     }
 }
