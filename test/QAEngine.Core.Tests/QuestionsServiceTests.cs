@@ -21,13 +21,13 @@ namespace QAEngine.Core.Tests
             {
                 new Data.Question 
                 {
-                    QuestionID = 3,
+                    ID = 3,
                     Content = "content",
                     CreateDate = DateTimeOffset.Parse("2019-01-01")
                 },
                 new Data.Question
                 {
-                    QuestionID = 5,
+                    ID = 5,
                     Content = "other content",
                     CreateDate = DateTimeOffset.Parse("2020-01-01")
                 }
@@ -36,13 +36,13 @@ namespace QAEngine.Core.Tests
             {
                 new Models.Question
                 {
-                    ID = returnedData[0].QuestionID,
+                    ID = returnedData[0].ID,
                     Content = returnedData[0].Content,
                     CreateDate = returnedData[0].CreateDate
                 },
                 new Models.Question
                 {
-                    ID = returnedData[1].QuestionID,
+                    ID = returnedData[1].ID,
                     Content = returnedData[1].Content,
                     CreateDate = returnedData[1].CreateDate
                 }
@@ -80,13 +80,13 @@ namespace QAEngine.Core.Tests
         {
             var returnedData = new Data.Question
             {
-                QuestionID = 3,
+                ID = 3,
                 Content = "content",
                 CreateDate = DateTimeOffset.Parse("2020-01-01")
             };
             var expected = new Models.Question
             {
-                ID = returnedData.QuestionID,
+                ID = returnedData.ID,
                 Content = returnedData.Content,
                 CreateDate = returnedData.CreateDate
             };

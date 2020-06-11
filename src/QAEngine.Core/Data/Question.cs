@@ -4,7 +4,7 @@ namespace QAEngine.Core.Data
 {
     public class Question
     {
-        public int QuestionID { get; set; }
+        public int ID { get; set; }
 
         public string Content { get; set; }
 

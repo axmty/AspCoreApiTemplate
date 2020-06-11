@@ -41,12 +41,26 @@ namespace QAEngine.Infra.Repositories
 
         private static class Queries
         {
-            public const string Get = @"SELECT * FROM [Question]";
+            public const string Get = @"
+                SELECT 
+                    [QuestionID] AS ID
+                    ,[Content]
+                    ,[CreateDate]
+                    ,[IsClosed]
+                FROM [dbo].[Question]";
             
-            public const string GetById = @"SELECT * FROM [Question] WHERE [QuestionID] = @QuestionID";
+            public const string GetById = @"
+                SELECT 
+                    [QuestionID] AS ID
+                    ,[Content]
+                    ,[CreateDate]
+                    ,[IsClosed]
+                FROM [dbo].[Question]
+                WHERE [QuestionID] = @QuestionID";
 
             public const string Create = @"
-                INSERT INTO [dbo].[Question] ([Content], [CreateDate]) VALUES (@Content, @CreateDate);
+                INSERT INTO [dbo].[Question] ([Content], [CreateDate])
+                VALUES (@Content, @CreateDate);
                 SELECT SCOPE_IDENTITY()";
         }
     }
