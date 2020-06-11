@@ -110,33 +110,18 @@ namespace QAEngine.Domain.Tests
         }
 
         [Fact]
-        [Trait(Constants.TraitCategory, nameof(QuestionsService.GetByIdAsync))]
+        [Trait(Constants.TraitCategory, nameof(QuestionsService.CreateAsync))]
         public async Task CreateAsync_WhenRepositoryMethodCreateAsync_ReturnsData_ReturnsExpected()
         {
-            var returnedData = new Question
-            {
-                ID = 3,
-                Content = "content",
-                CreateDate = DateTimeOffset.Parse("2020-01-01"),
-                IsClosed = true
-            };
-            var expected = new QuestionResponse
-            {
-                ID = returnedData.ID,
-                Content = returnedData.Content,
-                CreateDate = returnedData.CreateDate,
-                IsClosed = returnedData.IsClosed
-            };
-
             var builder = QuestionsServiceBuilder.Configure(builder =>
             {
-                builder.QuestionsRepository.Setup(r => r.GetByIdAsync(3)).ReturnsAsync(returnedData);
+                builder.QuestionsRepository.Setup(r => r.CreateAsync(It.IsAny<QuestionCreate>())).ReturnsAsync(3);
             });
 
-            var result = await builder.Build().GetByIdAsync(3);
+            var result = await builder.Build().CreateAsync(new QuestionCreateRequest());
 
-            result.Should().BeEquivalentTo(expected);
-            builder.QuestionsRepository.Verify(r => r.GetByIdAsync(3), Times.Once);
+            result.Should().Be(3);
+            builder.QuestionsRepository.Verify(r => r.CreateAsync(It.IsAny<QuestionCreate>()), Times.Once);
         }
 
         private class QuestionsServiceBuilder : SubjectBuilder<QuestionsService, QuestionsServiceBuilder>
