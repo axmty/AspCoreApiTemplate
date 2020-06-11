@@ -29,7 +29,6 @@ namespace QAEngine.Api
         {
             services
                 .AddTransient<ProblemDetailsFactory, ApiProblemDetailsFactory>()
-                .AddTransient<IValidator<QuestionCreateRequest>, QuestionCreateRequestValidator>()
                 .AddScoped<IQuestionsService, QuestionsService>()
                 .AddScoped<IQuestionsRepository, QuestionsRepository>()
                 .AddSingleton(this.BuildSqlConnectionFactory())
@@ -54,6 +53,7 @@ namespace QAEngine.Api
         {
             config.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
             config.LocalizationEnabled = false;
+            config.RegisterValidatorsFromAssemblyContaining<QuestionCreateRequestValidator>();
         }
 
         private ISqlConnectionFactory BuildSqlConnectionFactory()
