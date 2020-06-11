@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace QAEngine.Core.Data
+namespace QAEngine.Domain.Persistence
 {
     public class Question
     {

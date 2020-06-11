@@ -2,31 +2,32 @@ using System;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
-using QAEngine.Core.Errors;
-using QAEngine.Core.Exceptions;
-using QAEngine.Core.Repositories;
-using QAEngine.Core.Services;
+using QAEngine.Domain.Persistence;
+using QAEngine.Domain.Errors;
+using QAEngine.Domain.Exceptions;
+using QAEngine.Domain.Resources;
+using QAEngine.Domain.Services;
 using QAEngine.Tests.Core;
 using Xunit;
 
-namespace QAEngine.Core.Tests
+namespace QAEngine.Domain.Tests
 {
     public class QuestionsServiceTests
     {
         [Fact]
-        [Trait(Constants.TraitCategory, nameof(QuestionsService.GetAsync))]
+        [Trait(Constants.TraitCategory, nameof(QuestionsService.ListAsync))]
         public async Task GetAsync_WhenRepositoryMethodGetAsync_ReturnsData_ReturnsExpectedCollection()
         {
-            var returnedData = new Data.Question[]
+            var returnedData = new Question[]
             {
-                new Data.Question 
+                new Question
                 {
                     ID = 3,
                     Content = "content",
                     CreateDate = DateTimeOffset.Parse("2019-01-01"),
                     IsClosed = true
                 },
-                new Data.Question
+                new Question
                 {
                     ID = 5,
                     Content = "other content",
@@ -34,16 +35,16 @@ namespace QAEngine.Core.Tests
                     IsClosed = false
                 }
             };
-            var expected = new Models.Question[]
+            var expected = new QuestionResponse[]
             {
-                new Models.Question
+                new QuestionResponse
                 {
                     ID = returnedData[0].ID,
                     Content = returnedData[0].Content,
                     CreateDate = returnedData[0].CreateDate,
                     IsClosed = returnedData[0].IsClosed
                 },
-                new Models.Question
+                new QuestionResponse
                 {
                     ID = returnedData[1].ID,
                     Content = returnedData[1].Content,
@@ -54,13 +55,13 @@ namespace QAEngine.Core.Tests
 
             var builder = QuestionsServiceBuilder.Configure(builder =>
             {
-                builder.QuestionsRepository.Setup(r => r.GetAsync()).ReturnsAsync(returnedData);
+                builder.QuestionsRepository.Setup(r => r.ListAsync()).ReturnsAsync(returnedData);
             });
 
-            var result = await builder.Build().GetAsync();
+            var result = await builder.Build().ListAsync();
 
             result.Should().BeEquivalentTo(expected);
-            builder.QuestionsRepository.Verify(r => r.GetAsync(), Times.Once);
+            builder.QuestionsRepository.Verify(r => r.ListAsync(), Times.Once);
         }
 
         [Fact]
@@ -69,7 +70,7 @@ namespace QAEngine.Core.Tests
         {
             var builder = QuestionsServiceBuilder.Configure(builder =>
             {
-                builder.QuestionsRepository.Setup(r => r.GetByIdAsync(3)).ReturnsAsync((Data.Question)null);
+                builder.QuestionsRepository.Setup(r => r.GetByIdAsync(3)).ReturnsAsync((Question)null);
             });
 
             await builder.Build().Invoking(s => s.GetByIdAsync(3)).Should().ThrowDomainExceptionAsync<NotFoundException>(
@@ -82,14 +83,44 @@ namespace QAEngine.Core.Tests
         [Trait(Constants.TraitCategory, nameof(QuestionsService.GetByIdAsync))]
         public async Task GetByIdAsync_WhenRepositoryMethodGetByIdAsync_ReturnsData_ReturnsExpected()
         {
-            var returnedData = new Data.Question
+            var returnedData = new Question
             {
                 ID = 3,
                 Content = "content",
                 CreateDate = DateTimeOffset.Parse("2020-01-01"),
                 IsClosed = true
             };
-            var expected = new Models.Question
+            var expected = new QuestionResponse
+            {
+                ID = returnedData.ID,
+                Content = returnedData.Content,
+                CreateDate = returnedData.CreateDate,
+                IsClosed = returnedData.IsClosed
+            };
+
+            var builder = QuestionsServiceBuilder.Configure(builder =>
+            {
+                builder.QuestionsRepository.Setup(r => r.GetByIdAsync(3)).ReturnsAsync(returnedData);
+            });
+
+            var result = await builder.Build().GetByIdAsync(3);
+
+            result.Should().BeEquivalentTo(expected);
+            builder.QuestionsRepository.Verify(r => r.GetByIdAsync(3), Times.Once);
+        }
+
+        [Fact]
+        [Trait(Constants.TraitCategory, nameof(QuestionsService.GetByIdAsync))]
+        public async Task CreateAsync_WhenRepositoryMethodCreateAsync_ReturnsData_ReturnsExpected()
+        {
+            var returnedData = new Question
+            {
+                ID = 3,
+                Content = "content",
+                CreateDate = DateTimeOffset.Parse("2020-01-01"),
+                IsClosed = true
+            };
+            var expected = new QuestionResponse
             {
                 ID = returnedData.ID,
                 Content = returnedData.Content,

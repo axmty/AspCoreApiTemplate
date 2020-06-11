@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using QAEngine.Core.Data;
 
-namespace QAEngine.Core.Repositories
+namespace QAEngine.Domain.Persistence
 {
     public interface IQuestionsRepository
     {
-        Task<IEnumerable<Question>> GetAsync();
+        Task<IEnumerable<Question>> ListAsync();
 
         Task<Question> GetByIdAsync(int id);
 

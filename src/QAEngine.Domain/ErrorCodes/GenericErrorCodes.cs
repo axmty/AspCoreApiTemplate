@@ -1,4 +1,4 @@
-﻿namespace QAEngine.Core.Errors
+﻿namespace QAEngine.Domain.Errors
 {
     public static partial class ErrorCodes
     {

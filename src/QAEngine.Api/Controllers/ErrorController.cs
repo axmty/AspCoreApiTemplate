@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
-using QAEngine.Core.Errors;
-using QAEngine.Core.Exceptions;
+using QAEngine.Domain.Errors;
+using QAEngine.Domain.Exceptions;
 
 namespace QAEngine.Api.Controllers
 {

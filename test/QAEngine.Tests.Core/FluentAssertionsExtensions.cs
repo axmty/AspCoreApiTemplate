@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using FluentAssertions;
 using FluentAssertions.Specialized;
-using QAEngine.Core.Exceptions;
+using QAEngine.Domain.Exceptions;
 
 namespace QAEngine.Tests.Core
 {

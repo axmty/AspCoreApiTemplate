@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace QAEngine.Core.Exceptions
+namespace QAEngine.Domain.Exceptions
 {
     public abstract class DomainException : Exception
     {

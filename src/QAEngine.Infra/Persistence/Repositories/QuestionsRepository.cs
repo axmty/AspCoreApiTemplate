@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Dapper;
-using QAEngine.Core.Data;
-using QAEngine.Core.Repositories;
+using QAEngine.Domain.Persistence;
 
-namespace QAEngine.Infra.Repositories
+namespace QAEngine.Infra.Persistence
 {
     public class QuestionsRepository : IQuestionsRepository
     {
@@ -15,7 +14,7 @@ namespace QAEngine.Infra.Repositories
             _sqlConnectionFactory = sqlConnectionFactory;
         }
 
-        public async Task<IEnumerable<Question>> GetAsync()
+        public async Task<IEnumerable<Question>> ListAsync()
         {
             using var connection = _sqlConnectionFactory.Create();
 
@@ -59,8 +58,8 @@ namespace QAEngine.Infra.Repositories
                 WHERE [QuestionID] = @QuestionID";
 
             public const string Create = @"
-                INSERT INTO [dbo].[Question] ([Content], [CreateDate])
-                VALUES (@Content, @CreateDate);
+                INSERT INTO [dbo].[Question] ([Content], [CreateDate], [IsClosed])
+                VALUES (@Content, @CreateDate, 0);
                 SELECT SCOPE_IDENTITY()";
         }
     }

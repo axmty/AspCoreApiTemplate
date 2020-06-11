@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace QAEngine.Core.Models
+namespace QAEngine.Domain.Resources
 {
-    public class Question
+    public class QuestionResponse
     {
         public int ID { get; set; }
 

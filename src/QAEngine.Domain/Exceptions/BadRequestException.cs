@@ -1,6 +1,6 @@
-﻿using QAEngine.Core.Errors;
+﻿using QAEngine.Domain.Errors;
 
-namespace QAEngine.Core.Exceptions
+namespace QAEngine.Domain.Exceptions
 {
     public class BadRequestException : DomainException
     {

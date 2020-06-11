@@ -9,7 +9,7 @@
   </ItemGroup>
 	
   <ItemGroup>
-    <ProjectReference Include="..\QAEngine.Core\QAEngine.Core.csproj" />
+    <ProjectReference Include="..\QAEngine.Domain\QAEngine.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,10 +2,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using QAEngine.Core.Data;
-using QAEngine.Core.Repositories;
-using QAEngine.Core.Services;
-using QAEngine.Infra.Repositories;
+using QAEngine.Domain.Persistence;
+using QAEngine.Domain.Services;
+using QAEngine.Infra.Persistence;
 
 namespace QAEngine.Api
 {

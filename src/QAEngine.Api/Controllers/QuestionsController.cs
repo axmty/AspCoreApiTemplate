@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using QAEngine.Core.Models;
-using QAEngine.Core.Services;
+using QAEngine.Domain.Resources;
+using QAEngine.Domain.Services;
 
 namespace QAEngine.Api.Controllers
 {
@@ -17,9 +17,9 @@ namespace QAEngine.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetAsync()
+        public async Task<ActionResult> ListAsync()
         {
-            return this.Ok(await _questionsService.GetAsync());
+            return this.Ok(await _questionsService.ListAsync());
         }
 
         [HttpGet("{id}")]
@@ -29,9 +29,9 @@ namespace QAEngine.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Question>> CreateAsync(QuestionCreate question)
+        public async Task<ActionResult<QuestionResponse>> CreateAsync(QuestionCreateRequest question)
         {
-            return this.Ok(await _questionsService.CreateAsync(question));
+            return this.CreatedAtAction("Get", await _questionsService.CreateAsync(question));
         }
     }
 }

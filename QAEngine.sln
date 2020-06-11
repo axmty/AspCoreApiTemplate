@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QAEngine.Api", "src\QAEngine.Api\QAEngine.Api.csproj", "{44380AA0-EDE5-494F-948D-92B5808229BC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QAEngine.Core", "src\QAEngine.Core\QAEngine.Core.csproj", "{BC266B3E-5CF2-49C0-8F4A-F886FFFD90DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QAEngine.Domain", "src\QAEngine.Domain\QAEngine.Domain.csproj", "{BC266B3E-5CF2-49C0-8F4A-F886FFFD90DA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QAEngine.Infra", "src\QAEngine.Infra\QAEngine.Infra.csproj", "{3CE9A92F-76AB-4895-BF27-43D71ED406F2}"
 EndProject
@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7E0B2187-5B7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{870FDEB8-A9F3-4F88-89A1-523C09486630}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QAEngine.Core.Tests", "test\QAEngine.Core.Tests\QAEngine.Core.Tests.csproj", "{9922B66E-4306-4D85-A8CB-8FB3FA090112}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QAEngine.Domain.Tests", "test\QAEngine.Domain.Tests\QAEngine.Domain.Tests.csproj", "{9922B66E-4306-4D85-A8CB-8FB3FA090112}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QAEngine.Tests.Core", "test\QAEngine.Tests.Core\QAEngine.Tests.Core.csproj", "{356657B3-E39F-492D-AE7F-43FBE872CCCC}"
 EndProject

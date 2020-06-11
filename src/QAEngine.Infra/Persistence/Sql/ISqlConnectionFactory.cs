@@ -1,6 +1,6 @@
 ﻿using System.Data.SqlClient;
 
-namespace QAEngine.Core.Data
+namespace QAEngine.Infra.Persistence
 {
     public interface ISqlConnectionFactory
     {
