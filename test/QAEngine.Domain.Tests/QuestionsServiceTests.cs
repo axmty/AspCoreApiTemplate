@@ -130,7 +130,7 @@ namespace QAEngine.Domain.Tests
 
             public override QuestionsService Build()
             {
-                return new QuestionsService(this.BuildMapper(), this.QuestionsRepository.Object);
+                return new QuestionsService(this.UseConfiguredMapper(), this.QuestionsRepository.Object);
             }
 
             protected override void Init()

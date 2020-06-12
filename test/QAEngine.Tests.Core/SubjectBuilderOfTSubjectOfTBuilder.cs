@@ -21,7 +21,7 @@ namespace QAEngine.Tests.Core
         
         protected abstract void Init();
 
-        protected IMapper BuildMapper()
+        protected IMapper UseConfiguredMapper()
         {
             return new MapperConfiguration(cfg => cfg.AddMaps(typeof(DomainProfile))).CreateMapper();
         }
