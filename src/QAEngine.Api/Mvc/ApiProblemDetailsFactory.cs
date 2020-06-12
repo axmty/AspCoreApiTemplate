@@ -63,11 +63,12 @@ namespace QAEngine.Api.Mvc
                 throw new ArgumentNullException(nameof(modelStateDictionary));
             }
 
+            var path = httpContext.Request.Path;
             var problemDetails = new ValidationProblemDetails(modelStateDictionary)
             {
                 Status = 400,
                 Type = ErrorCodes.Generic.ValidationFailed,
-                Title = "One or more validation errors occured, see 'errors' for more details."
+                Title = $"One or more validation errors occured on path {path}, see 'errors' for more details."
             };
 
             this.AddTraceIdentifier(httpContext, problemDetails);
