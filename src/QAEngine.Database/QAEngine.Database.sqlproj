@@ -60,6 +60,6 @@
     <Folder Include="Properties" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Schema.sql" />
+    <None Include="DatabaseSetup.sql" />
   </ItemGroup>
 </Project>
