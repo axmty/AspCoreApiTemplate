@@ -1,3 +1,4 @@
+using AutoMapper;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
 using QAEngine.Api.Mvc;
+using QAEngine.Domain.Mapping;
 using QAEngine.Domain.Persistence;
 using QAEngine.Domain.Resources;
 using QAEngine.Domain.Services;
@@ -32,6 +34,9 @@ namespace QAEngine.Api
                 .AddScoped<IQuestionsService, QuestionsService>()
                 .AddScoped<IQuestionsRepository, QuestionsRepository>()
                 .AddSingleton(this.BuildSqlConnectionFactory())
+                .AddAutoMapper(typeof(DomainProfile));
+
+            services
                 .AddControllers()
                 .AddNewtonsoftJson()
                 .AddFluentValidation(this.ConfigureFluentValidation);

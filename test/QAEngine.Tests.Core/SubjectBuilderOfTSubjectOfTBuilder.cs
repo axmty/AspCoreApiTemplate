@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Reflection;
+using AutoMapper;
+using QAEngine.Domain.Mapping;
 
 namespace QAEngine.Tests.Core
 {
@@ -18,5 +20,10 @@ namespace QAEngine.Tests.Core
         public abstract TSubject Build();
         
         protected abstract void Init();
+
+        protected IMapper BuildMapper()
+        {
+            return new MapperConfiguration(cfg => cfg.AddMaps(typeof(DomainProfile))).CreateMapper();
+        }
     }
 }
