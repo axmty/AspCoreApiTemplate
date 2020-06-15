@@ -16,7 +16,7 @@ namespace QAEngine.Domain.Tests
     {
         [Fact]
         [Trait(Constants.TraitCategory, nameof(QuestionsService.ListAsync))]
-        public async Task GetAsync_WhenRepositoryMethodGetAsync_ReturnsData_ReturnsExpectedCollection()
+        public async Task ListAsync_WhenRepositoryMethodGetAsync_ReturnsData_ReturnsExpectedCollection()
         {
             var returnedData = new Question[]
             {
