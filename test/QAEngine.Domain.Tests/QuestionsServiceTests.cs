@@ -18,16 +18,39 @@ namespace QAEngine.Domain.Tests
         [Trait(Constants.TraitCategory, nameof(QuestionsService.ListAsync))]
         public async Task ListAsync_WhenRepositoryMethodGetAsync_ReturnsData_ReturnsExpectedCollection()
         {
-            var returnedData = new Question[]
+            var builder = QuestionsServiceBuilder.Configure(builder =>
             {
-                new Question
+                var returnedData = new Question[]
+                {
+                    new Question
+                    {
+                        Id = 3,
+                        Content = "content",
+                        CreateDate = DateTimeOffset.Parse("2019-01-01"),
+                        IsClosed = true
+                    },
+                    new Question
+                    {
+                        Id = 5,
+                        Content = "other content",
+                        CreateDate = DateTimeOffset.Parse("2020-01-01"),
+                        IsClosed = false
+                    }
+                };
+
+                builder.QuestionsRepository.Setup(r => r.ListAsync()).ReturnsAsync(returnedData);
+            });
+
+            var expected = new QuestionResponse[]
+{
+                new QuestionResponse
                 {
                     Id = 3,
                     Content = "content",
                     CreateDate = DateTimeOffset.Parse("2019-01-01"),
                     IsClosed = true
                 },
-                new Question
+                new QuestionResponse
                 {
                     Id = 5,
                     Content = "other content",
@@ -35,28 +58,6 @@ namespace QAEngine.Domain.Tests
                     IsClosed = false
                 }
             };
-            var expected = new QuestionResponse[]
-            {
-                new QuestionResponse
-                {
-                    Id = returnedData[0].Id,
-                    Content = returnedData[0].Content,
-                    CreateDate = returnedData[0].CreateDate,
-                    IsClosed = returnedData[0].IsClosed
-                },
-                new QuestionResponse
-                {
-                    Id = returnedData[1].Id,
-                    Content = returnedData[1].Content,
-                    CreateDate = returnedData[1].CreateDate,
-                    IsClosed = returnedData[1].IsClosed
-                }
-            };
-
-            var builder = QuestionsServiceBuilder.Configure(builder =>
-            {
-                builder.QuestionsRepository.Setup(r => r.ListAsync()).ReturnsAsync(returnedData);
-            });
 
             var result = await builder.Build().ListAsync();
 
@@ -83,25 +84,26 @@ namespace QAEngine.Domain.Tests
         [Trait(Constants.TraitCategory, nameof(QuestionsService.GetByIdAsync))]
         public async Task GetByIdAsync_WhenRepositoryMethodGetByIdAsync_ReturnsData_ReturnsExpected()
         {
-            var returnedData = new Question
+            var builder = QuestionsServiceBuilder.Configure(builder =>
+            {
+                var returnedData = new Question
+                {
+                    Id = 3,
+                    Content = "content",
+                    CreateDate = DateTimeOffset.Parse("2020-01-01"),
+                    IsClosed = true
+                };
+
+                builder.QuestionsRepository.Setup(r => r.GetByIdAsync(3)).ReturnsAsync(returnedData);
+            });
+
+            var expected = new QuestionResponse
             {
                 Id = 3,
                 Content = "content",
                 CreateDate = DateTimeOffset.Parse("2020-01-01"),
                 IsClosed = true
             };
-            var expected = new QuestionResponse
-            {
-                Id = returnedData.Id,
-                Content = returnedData.Content,
-                CreateDate = returnedData.CreateDate,
-                IsClosed = returnedData.IsClosed
-            };
-
-            var builder = QuestionsServiceBuilder.Configure(builder =>
-            {
-                builder.QuestionsRepository.Setup(r => r.GetByIdAsync(3)).ReturnsAsync(returnedData);
-            });
 
             var result = await builder.Build().GetByIdAsync(3);
 
