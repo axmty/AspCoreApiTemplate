@@ -7,12 +7,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{54FD46C5-F1A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{482F1632-7111-4960-B557-F08E4A9CBE35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BootstoreApi.App", "src\BootstoreApi.App\BootstoreApi.App.csproj", "{8527C69C-2379-460C-A4E9-BD9FCAF3B3B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookstoreApi.App", "src\BootstoreApi.App\BookstoreApi.App.csproj", "{8527C69C-2379-460C-A4E9-BD9FCAF3B3B0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9D3AA57A-F68E-41DF-898C-391A2BD1EDC7}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookstoreApi.Core", "src\BookstoreApi.Core\BookstoreApi.Core.csproj", "{166E9300-8262-42FB-B8E6-B89E5F5ED382}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookstoreApi.Infrastructure", "src\BookstoreApi.Infrastructure\BookstoreApi.Infrastructure.csproj", "{1313FA5E-9D96-4139-8831-A6E7BD200249}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,12 +28,22 @@ Global
 		{8527C69C-2379-460C-A4E9-BD9FCAF3B3B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8527C69C-2379-460C-A4E9-BD9FCAF3B3B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8527C69C-2379-460C-A4E9-BD9FCAF3B3B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{166E9300-8262-42FB-B8E6-B89E5F5ED382}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{166E9300-8262-42FB-B8E6-B89E5F5ED382}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{166E9300-8262-42FB-B8E6-B89E5F5ED382}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{166E9300-8262-42FB-B8E6-B89E5F5ED382}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1313FA5E-9D96-4139-8831-A6E7BD200249}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1313FA5E-9D96-4139-8831-A6E7BD200249}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1313FA5E-9D96-4139-8831-A6E7BD200249}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1313FA5E-9D96-4139-8831-A6E7BD200249}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8527C69C-2379-460C-A4E9-BD9FCAF3B3B0} = {54FD46C5-F1AC-459F-925B-3AD5E5E2C18D}
+		{166E9300-8262-42FB-B8E6-B89E5F5ED382} = {54FD46C5-F1AC-459F-925B-3AD5E5E2C18D}
+		{1313FA5E-9D96-4139-8831-A6E7BD200249} = {54FD46C5-F1AC-459F-925B-3AD5E5E2C18D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B0CA94BF-960E-4B18-A0EA-3DFBDBC7154D}
