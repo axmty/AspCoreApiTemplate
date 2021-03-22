@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace BookstoreApi.Core.Entities
+namespace BookstoreApi.Core.Models
 {
     public class Address
     {
-        public int AddressId { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 

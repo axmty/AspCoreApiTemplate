@@ -33,6 +33,7 @@ CREATE TABLE [Addresses]
 	[Line1]			NVARCHAR(100),
 	[Line2]			NVARCHAR(100) NULL,
 	[Postcode]		CHAR(5),
+	[IsDefault]		BIT,
 	[CreatedAt]		DATETIMEOFFSET,
 	[UpdatedAt]		DATETIMEOFFSET
 

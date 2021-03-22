@@ -12,11 +12,11 @@ VALUES
 
 INSERT INTO [Addresses]
 (
-	[CustomerId], [Name], [Line1], [Line2], [CreatedAt], [UpdatedAt]
+	[CustomerId], [Name], [Line1], [Line2], [IsDefault], [CreatedAt], [UpdatedAt]
 )
 VALUES
 (
-	1, 'Maison', '14, RUE AZERTY', NULL, '2020-01-01', '2020-02-02'
+	1, 'Maison', '14, RUE AZERTY', NULL, 1, '2020-01-01', '2020-02-02'
 )
 
 GO

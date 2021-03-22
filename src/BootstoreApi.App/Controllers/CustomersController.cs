@@ -1,6 +1,6 @@
-﻿using System.Data.SqlClient;
+﻿using System.Threading.Tasks;
 using BookstoreApi.Core.Entities;
-using Dapper;
+using BookstoreApi.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookstoreApi.App.Controllers
@@ -9,29 +9,23 @@ namespace BookstoreApi.App.Controllers
     [Route("customers")]
     public class CustomersController : ControllerBase
     {
-        [HttpGet("{id}")]
-        public ActionResult<Customer> GetAsync([FromRoute(Name = "id")]int id)
+        private readonly ICustomersService customersService;
+
+        public CustomersController(ICustomersService customersService)
         {
-            if (id <= 0)
-            {
-                return this.BadRequest();
-            }
+            this.customersService = customersService;
+        }
 
-            var sql = "SELECT * FROM Customers WHERE CustomerId = @Id";
+        [HttpGet]
+        public async Task<ActionResult<Customer>> GetAllAsync()
+        {
+            return this.Ok(await this.customersService.GetAllAsync().ConfigureAwait(true));
+        }
 
-            using var connection = new SqlConnection(@"Server=DESKTOP-C5T4GM0\SQLEXPRESS;Database=BOOKSTORE;Trusted_Connection=True;");
-
-            var customer = connection.QuerySingleOrDefault<Customer>(sql, new
-            {
-                Id = id
-            });
-
-            if (customer == null)
-            {
-                return this.NotFound();
-            }
-
-            return customer;
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Customer>> GetAsync([FromRoute(Name = "id")]int id)
+        {
+            return this.Ok(await this.customersService.GetAsync(id).ConfigureAwait(true));
         }
     }
 }

@@ -1,3 +1,8 @@
+using BookstoreApi.App.Middleware;
+using BookstoreApi.Core.Repositories;
+using BookstoreApi.Core.Services;
+using BookstoreApi.Infrastructure;
+using BookstoreApi.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +24,11 @@ namespace BookstoreApi.App
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddTransient<ICustomersService, CustomersService>();
+            services.AddTransient<ICustomersRepository, CustomersRepository>();
+
+            services.AddSingleton<IDbConnectionFactory>(_ => new DbConnectionFactory(this.Configuration.GetConnectionString("Bookstore")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -26,8 +36,14 @@ namespace BookstoreApi.App
         {
             if (env.IsDevelopment())
             {
+                app.UseExceptionHandler("/error-development");
+            }
+            else
+            {
                 app.UseExceptionHandler("/error");
             }
+
+            app.UseNotFoundHandler();
 
             app.UseHttpsRedirection();
 
