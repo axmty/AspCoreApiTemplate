@@ -1,4 +1,5 @@
 using BookstoreApi.App.Middleware;
+using BookstoreApi.Core.Mappers;
 using BookstoreApi.Core.Repositories;
 using BookstoreApi.Core.Services;
 using BookstoreApi.Infrastructure;
@@ -27,6 +28,8 @@ namespace BookstoreApi.App
 
             services.AddTransient<ICustomersService, CustomersService>();
             services.AddTransient<ICustomersRepository, CustomersRepository>();
+
+            services.AddTransient<IMapper<Core.Entities.Customer, Core.Models.Customer>, CustomerEntityToModelMapper>();
 
             services.AddSingleton<IDbConnectionFactory>(_ => new DbConnectionFactory(this.Configuration.GetConnectionString("Bookstore")));
         }
