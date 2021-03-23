@@ -11,13 +11,16 @@ namespace BookstoreApi.Core.Services
     {
         private readonly ICustomersRepository customersRepository;
         private readonly IMapper<Entities.Customer, Customer> customerMapper;
+        private readonly IMapper<Entities.Address, Address> addressMapper;
 
         public CustomersService(
             ICustomersRepository customersRepository,
-            IMapper<Entities.Customer, Customer> customerMapper)
+            IMapper<Entities.Customer, Customer> customerMapper,
+            IMapper<Entities.Address, Address> addressMapper)
         {
             this.customersRepository = customersRepository;
             this.customerMapper = customerMapper;
+            this.addressMapper = addressMapper;
         }
 
         public async Task<CollectionResponse<Customer>> GetAllAsync()
@@ -34,6 +37,13 @@ namespace BookstoreApi.Core.Services
             return customer == null
                 ? throw new ResourceNotFoundException($"Customer with ID {id} does not exist.")
                 : this.customerMapper.Map(customer);
+        }
+
+        public async Task<CollectionResponse<Address>> GetAddressesAsync(int customerId)
+        {
+            var (addresses, count) = await this.customersRepository.GetAddressesAsync(customerId).ConfigureAwait(true);
+
+            return new CollectionResponse<Address>(addresses.Select(this.addressMapper.Map), 1, count, 1);
         }
     }
 }

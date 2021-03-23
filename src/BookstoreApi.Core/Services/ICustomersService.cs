@@ -8,5 +8,7 @@ namespace BookstoreApi.Core.Services
         Task<CollectionResponse<Customer>> GetAllAsync();
 
         Task<Customer> GetAsync(int id);
+
+        Task<CollectionResponse<Address>> GetAddressesAsync(int customerId);
     }
 }

@@ -1,6 +1,3 @@
-USE [BOOKSTORE]
-GO
-
 INSERT INTO [Customers]
 (
 	[FirstName], [LastName], [Phone], [Email], [CreatedAt], [UpdatedAt]

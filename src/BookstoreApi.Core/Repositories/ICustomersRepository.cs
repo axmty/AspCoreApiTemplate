@@ -9,5 +9,7 @@ namespace BookstoreApi.Core.Repositories
         Task<(IEnumerable<Customer>, int)> GetAllAsync();
 
         Task<Customer> GetAsync(int id);
+
+        Task<(IEnumerable<Address>, int)> GetAddressesAsync(int customerId);
     }
 }

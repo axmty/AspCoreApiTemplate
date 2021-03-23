@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using BookstoreApi.Core.Entities;
 using BookstoreApi.Core.Repositories;
+using BookstoreApi.Infrastructure.Extensions;
 using Dapper;
 
 namespace BookstoreApi.Infrastructure.Repositories
@@ -18,16 +19,10 @@ namespace BookstoreApi.Infrastructure.Repositories
         public async Task<(IEnumerable<Customer>, int)> GetAllAsync()
         {
             var sql = CustomersRepositoryQueries.GetAll;
-            SqlMapper.GridReader resultSets;
 
             using var connection = this.dbConnectionFactory.Create();
 
-            resultSets = await connection.QueryMultipleAsync(sql).ConfigureAwait(true);
-
-            var count = await resultSets.ReadSingleAsync<int>().ConfigureAwait(true);
-            var customers = await resultSets.ReadAsync<Customer>().ConfigureAwait(true);
-
-            return (customers, count);
+            return await connection.QueryWithCount<Customer>(sql).ConfigureAwait(true);
         }
 
         public async Task<Customer> GetAsync(int id)
@@ -42,6 +37,18 @@ namespace BookstoreApi.Infrastructure.Repositories
             }).ConfigureAwait(true);
 
             return customer;
+        }
+
+        public async Task<(IEnumerable<Address>, int)> GetAddressesAsync(int customerId)
+        {
+            var sql = CustomersRepositoryQueries.GetAddresses;
+
+            using var connection = this.dbConnectionFactory.Create();
+
+            return await connection.QueryWithCount<Address>(sql, new
+            {
+                CustomerId = customerId
+            }).ConfigureAwait(true);
         }
     }
 }

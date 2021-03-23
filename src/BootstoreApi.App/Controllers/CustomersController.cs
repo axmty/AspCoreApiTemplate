@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using BookstoreApi.Core.Entities;
+using BookstoreApi.Core.Models;
 using BookstoreApi.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +26,12 @@ namespace BookstoreApi.App.Controllers
         public async Task<ActionResult<Customer>> GetAsync([FromRoute(Name = "id")]int id)
         {
             return this.Ok(await this.customersService.GetAsync(id).ConfigureAwait(true));
+        }
+
+        [HttpGet("{id}/addresses")]
+        public async Task<ActionResult<Address>> GetAddressesAsync([FromRoute(Name = "id")] int customerId)
+        {
+            return this.Ok(await this.customersService.GetAddressesAsync(customerId).ConfigureAwait(true));
         }
     }
 }

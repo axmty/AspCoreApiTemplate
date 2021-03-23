@@ -30,6 +30,7 @@ namespace BookstoreApi.App
             services.AddTransient<ICustomersRepository, CustomersRepository>();
 
             services.AddTransient<IMapper<Core.Entities.Customer, Core.Models.Customer>, CustomerEntityToModelMapper>();
+            services.AddTransient<IMapper<Core.Entities.Address, Core.Models.Address>, AddressEntityToModelMapper>();
 
             services.AddSingleton<IDbConnectionFactory>(_ => new DbConnectionFactory(this.Configuration.GetConnectionString("Bookstore")));
         }
